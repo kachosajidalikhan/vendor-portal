@@ -1,5 +1,7 @@
-// import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+// Updated App.js for Web App with Responsive Sidebar
+// Converted from Desktop-centric flow
+
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -34,7 +36,7 @@ function App() {
   const [stage, setStage] = useState("login");
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500);
+    const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -44,21 +46,19 @@ function App() {
     <Router>
       <AnimatePresence mode="wait">
         <Routes>
-          {/* All routing is stable, stage check inside */}
-          <Route path="/*" element={
+          <Route path="/" element={
             <motion.div
               key={stage}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.3 }}
             >
               {stage === "login" && <LoginPage onLoginSuccess={() => setStage("finalizing")} />}
               {stage === "finalizing" && <Finalizing onFinalizeComplete={() => setStage("done")} />}
               {stage === "done" && <DashboardLayout />}
             </motion.div>
           }>
-            {/* These nested routes only matter when stage === "done" */}
             {stage === "done" && (
               <>
                 <Route index element={<Dashboard />} />

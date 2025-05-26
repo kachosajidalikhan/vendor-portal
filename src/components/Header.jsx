@@ -1,14 +1,20 @@
-import { Search } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import icons from "../constants";
 import { NavLink } from "react-router-dom";
 
-export default function Header({ title,lazeez }) {
+
+export default function Header({ title, lazeez, isSidebarOpen, toggleSidebar }) {
   return (
     <header className="flex justify-between items-center pb-6 mb-4 border-b border-[#E6EFF5]">
       <div className="flex items-center gap-2">
-
-      <h2 className="text-2xl font-bold text-pink-600">{title}</h2>
-      {lazeez && (<span className="text-2xl Sunkids text-black">{lazeez}</span>)}
+        {/* <button
+          onClick={toggleSidebar}
+          className="lg:hidden text-[#ED004F] focus:outline-none"
+        >
+          {isSidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button> */}
+        <h2 className="text-2xl font-bold text-pink-600">{title}</h2>
+        {lazeez && (<span className="text-2xl Sunkids text-black">{lazeez}</span>)}
       </div>
       <div className="flex items-center gap-4">
         <div className="relative">

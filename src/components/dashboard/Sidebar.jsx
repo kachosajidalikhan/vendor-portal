@@ -3,7 +3,8 @@ import icons from "../../constants/index";
 import { useState, useEffect, useRef } from 'react';
 import { LogOut } from "lucide-react";
 
-export default function Sidebar() {
+export default function Sidebar({ onLinkClick }) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navItems = [
     { label: "Dashboard", icon: icons.HomeIcon, iconActive: icons.HomeIconActive, to: "/" },
     { label: "Manage Orders", icon: icons.ManageOrderIcon, iconActive: icons.ManageOrderIconActive, to: "/manage-orders" },
@@ -30,18 +31,18 @@ export default function Sidebar() {
       // For other paths, match if current path starts with the item's path
       return location.pathname.startsWith(item.to);
     });
-    
+
     if (activeItem && navRefs.current[activeItem.to]) {
       const itemElement = navRefs.current[activeItem.to];
       if (sidebarRef.current && itemElement) {
-         // Calculate the top position relative to the sidebar
-         const sidebarTop = sidebarRef.current.getBoundingClientRect().top;
-         const itemTop = itemElement.getBoundingClientRect().top;
-         setBarTop(itemTop - sidebarTop);
+        // Calculate the top position relative to the sidebar
+        const sidebarTop = sidebarRef.current.getBoundingClientRect().top;
+        const itemTop = itemElement.getBoundingClientRect().top;
+        setBarTop(itemTop - sidebarTop);
       }
     } else {
       // Handle initial state or no active link scenario
-       setBarTop(-100); // Move it off-screen or handle as needed
+      setBarTop(-100); // Move it off-screen or handle as needed
     }
   }, [location.pathname, navItems]); // Recalculate when location or navItems change
 
@@ -56,6 +57,7 @@ export default function Sidebar() {
             <li key={item.label} className="relative" ref={el => navRefs.current[item.to] = el}>
               <NavLink
                 to={item.to}
+                onClick={onLinkClick}
                 className={({ isActive }) =>
                   `flex items-center gap-3 p-2 rounded-md font-medium transition-colors duration-150 ${isActive
                     ? "text-pink-600"
@@ -83,38 +85,39 @@ export default function Sidebar() {
             </li>
           ))}
           <li className="relative">
-            
-          <NavLink
-                to='/'
-                className={({ isActive }) =>
-                  `flex items-center gap-3 p-2 rounded-md font-medium transition-colors duration-150 ${isActive
-                    ? "text-pink-600"
-                    : "text-gray-500 hover:bg-pink-50"
-                  }`
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    <div className="w-5 h-5 flex items-center justify-center">
-                      {/* <img src={isActive ? item.iconActive : item.icon} alt="" className="w-5 h-5" /> */}
-                      <LogOut className="w-5 h-5"/>
-                    </div>
-                    Logout
-                  </>
-                )}
-              </NavLink>
-                </li>
+
+            <NavLink
+              to='/'
+              onClick={onLinkClick}
+              className={({ isActive }) =>
+                `flex items-center gap-3 p-2 rounded-md font-medium transition-colors duration-150 ${isActive
+                  ? "text-pink-600"
+                  : "text-gray-500 hover:bg-pink-50"
+                }`
+              }
+            >
+              {({ isActive }) => (
+                <>
+                  <div className="w-5 h-5 flex items-center justify-center">
+                    {/* <img src={isActive ? item.iconActive : item.icon} alt="" className="w-5 h-5" /> */}
+                    <LogOut className="w-5 h-5" />
+                  </div>
+                  Logout
+                </>
+              )}
+            </NavLink>
+          </li>
         </ul>
       </nav>
 
 
 
 
-       {/* Single pink bar with dynamic top position and transition */}
-       <span
-         className="absolute left-0 h-9 w-1 bg-pink-600 rounded-tl-sm rounded-bl-sm rounded-tr-2xl rounded-br-2xl transition-all duration-500 ease-in-out"
-         style={{ top: `${barTop}px` }}
-       ></span>
+      {/* Single pink bar with dynamic top position and transition */}
+      <span
+        className="absolute left-0 h-9 w-1 bg-pink-600 rounded-tl-sm rounded-bl-sm rounded-tr-2xl rounded-br-2xl transition-all duration-500 ease-in-out"
+        style={{ top: `${barTop}px` }}
+      ></span>
       <div className="mt-auto p-4 border-r border-[#E6EFF5]">
         <div className="flex items-center gap-2 text-gray-500">
           <svg
