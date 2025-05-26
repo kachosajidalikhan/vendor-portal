@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/Poppins-Regular.ttf') format('opentype');
+}
+.Poppins{
+  font-family: "Poppins" !important;
+}
+
+@font-face {
+  font-family: 'Poppins-bold';
+  src: url('/Poppins-Bold.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Sunkids';
+  src: url('/Sunkids_Demo.ttf') format('opentype') ;
+}
+.Sunkids{
+  font-family: "Sunkids" !important;
+}
+.Poppins-bold{
+  font-family: "Poppins-bold" !important;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  width: 100%;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateX(5px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+@keyframes fade-out {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(5px); }
+}
+.animate-fade-out {
+  animation: fade-out 0.5s ease-out;
+}
