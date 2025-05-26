@@ -58,7 +58,7 @@ function Notifications() {
   return (
     <div className="w-full min-h-screen bg-white p-2">
       <div className="w-full mx-auto p-4">
-        <Header title="Notifications" />
+        {/* <Header title="Notifications" /> */}
 
         <div className="space-y-3 pt-12 px-30 border-l border-[#E6EFF5]">
           {notifications.map((notification) => (

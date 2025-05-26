@@ -31,7 +31,7 @@ export default function OrderDetail() {
 
     return (
         <div className="w-full min-h-screen bg-white p-6">
-            <Header title="Order Detail" />
+            {/* <Header title="Order Detail" /> */}
             <div className="max-w-3xl p-4 md:p-6">
                 <div className="pb-2 mb-4 cursor-pointer" onClick={handleBack}>
                     <ChevronLeft color="#ED004F" />

@@ -222,7 +222,7 @@ export default function Chats() {
 
   return (
     <div className="bg-white w-full min-h-screen p-6">
-      <Header title="Chats" />
+      {/* <Header title="Chats" /> */}
       <div className="max-w-7xl mx-auto">
         <div className="bg-white border-l border-[#E6EFF5] pt-15">
           <table className="w-full">

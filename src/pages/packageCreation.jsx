@@ -78,7 +78,7 @@ export default function PackageCreation() {
 
     return (
         <div className="w-full min-h-screen bg-white p-6">
-            <Header title="Create a Package" />
+            {/* <Header title="Create a Package" /> */}
             <div className="max-w-3xl p-4 md:p-6">
                 <div onClick={() => navigate(-1)} className="pb-2 cursor-pointer">
                     <ChevronLeft color="#ED004F" />

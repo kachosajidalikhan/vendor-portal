@@ -55,7 +55,7 @@ const EditMenuPage = () => {
     return (
         <div className="w-full min-h-screen bg-white">
             <div className="w-full mx-auto p-4">
-                <Header title="Edit Menu" />
+                {/* <Header title="Edit Menu" /> */}
 
                 <div className="flex justify-center items-center min-h-screen px-4 py-6 bg-white relative">
                     <button onClick={() => navigate(-1)} className="absolute left-4 top-4 text-pink-600">

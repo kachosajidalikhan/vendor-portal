@@ -37,7 +37,7 @@ const CreateOfferDetail = () => {
 
   return (
     <div className="min-h-screen bg-white p-6 space-y-8">
-      <Header title={"Offer Details"} />
+      {/* <Header title={"Offer Details"} /> */}
       {/* Top Metrics Card */}
       <div className="relative ">
         <div onClick={() => navigate(-1)} className="pb-2 cursor-pointer">

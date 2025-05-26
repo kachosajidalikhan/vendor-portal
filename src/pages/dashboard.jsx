@@ -109,7 +109,7 @@ export default function Dashboard() {
             {/* Main Content */}
             <div className="flex-1 overflow-auto">
                 <div className="p-6">
-                    <Header title="Dashboard" />
+                    {/* <Header title="Dashboard" /> */}
                 </div>
                 {/* Header */}
                 {/* <Header searchQuery={searchQuery} onSearch={handleSearch} /> */}

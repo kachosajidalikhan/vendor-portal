@@ -103,7 +103,7 @@ function CreateOffer() {
   return (
     <div className="w-full min-h-screen bg-white">
       <div className="w-full mx-auto p-4">
-        <Header title={"Create an Offer"} />
+        {/* <Header title={"Create an Offer"} /> */}
 
         <div className="space-y-3 pt-12 px-30 border-[#E6EFF5]">
           {SavePopup && (

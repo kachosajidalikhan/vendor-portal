@@ -51,7 +51,7 @@ export default function EditOfferPage() {
 
   return (
     <div className=" bg-white p-6 space-y-8">
-      <Header title={"Edit Offer"} />
+      {/* <Header title={"Edit Offer"} /> */}
       <div className="flex bg-white h-screen">
         {/* Editor Section */}
         <div className="w-1/1 p-6 overflow-y-auto">

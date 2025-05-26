@@ -366,7 +366,7 @@ export default function ManageOrders() {
 
   return (
     <div className="bg-white w-full min-h-screen p-6">
-      <Header title="Manage Orders" />
+      {/* <Header title="Manage Orders" /> */}
       <div className="max-w-7xl mx-auto relative">
         <div className="bg-white border-l border-[#E6EFF5] pt-15">
           <table className="w-full">

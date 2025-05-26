@@ -88,7 +88,7 @@ export default function Settings() {
 
   return (
     <div className="w-full min-h-screen bg-white p-6">
-      <Header title="Settings" />
+      {/* <Header title="Settings" /> */}
       <div className="max-w-3xl p-4 md:p-6">
         <div className="mb-8">
           <h1 className="font-medium text-[#BF0644]">Edit Profile</h1>

@@ -83,9 +83,9 @@ const FoodList = () => {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
-    return (
+    return (<>
+            {/* <Header title={"Menu"} /> */}
         <div className="p-6 min-h-screen w-full bg-white ">
-            <Header title={"Menu"} />
             <div className="space-y-3 pt-12 px-30 border-[#E6EFF5]">
                 {SavePopup && (
                     <div className={`absolute top-25 left-60 right-0 m-auto flex items-center gap-2 p-2 bg-white rounded-xl shadow-lg w-1/2 ${isFadingOut ? "animate-fade-out " : "animate-fade-in"} `}>
@@ -161,6 +161,7 @@ const FoodList = () => {
                 <img src={icons.LazeezLogo} alt="" />
             </div>
         </div>
+                </>
     );
 };
 

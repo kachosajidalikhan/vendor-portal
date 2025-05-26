@@ -24,7 +24,7 @@ const CreateMenuPage = () => {
     };
     return (<div className='w-full min-h-screen bg-white'>
         <div className="w-full mx-auto p-4">
-            <Header title={"Creating Menu"} />
+            {/* <Header title={"Creating Menu"} /> */}
             <div className="flex justify-center items-center min-h-screen px-4 py-6 bg-white relative">
                 {/* Back Arrow */}
                 <button onClick={() => navigate(-1)} className="absolute left-4 top-4 text-pink-600">

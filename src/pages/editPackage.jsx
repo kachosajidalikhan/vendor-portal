@@ -67,7 +67,7 @@ export default function EditPackage() {
 
     return (
         <div className="w-full min-h-screen bg-white p-6">
-            <Header title="Edit Package" />
+            {/* <Header title="Edit Package" /> */}
             <div className="max-w-3xl p-4 md:p-6">
                 <div className="pb-2 cursor-pointer">
                     <ChevronLeft color="#ED004F" onClick={handleBack} />

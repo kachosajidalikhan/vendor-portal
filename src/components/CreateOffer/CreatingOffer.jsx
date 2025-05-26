@@ -52,7 +52,7 @@ export default function CreatingOfferPage() {
     <div className="w-full min-h-screen bg-white">
       <div className="w-full mx-auto p-4">
 
-      <Header title={"Creating Offer"} />
+      {/* <Header title={"Creating Offer"} /> */}
     <div className="flex bg-white h-screen">
       {/* Editor Section */}
       <div className="w-1/1 p-6 overflow-y-auto">

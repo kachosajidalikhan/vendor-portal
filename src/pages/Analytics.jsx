@@ -121,7 +121,7 @@ export default function Analytics({
   return (
     <div className="w-full min-h-screen bg-white p-6">
       {/* Header */}
-      <Header title={'Analytics'}/>
+      {/* <Header title={'Analytics'}/> */}
      
       <div className="container mx-auto p-4">
         {/* Statistics Section */}
