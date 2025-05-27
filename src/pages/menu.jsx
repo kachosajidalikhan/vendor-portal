@@ -84,37 +84,41 @@ const FoodList = () => {
     }, []);
 
     return (<>
-            {/* <Header title={"Menu"} /> */}
-        <div className="p-6 min-h-screen w-full bg-white ">
-            <div className="space-y-3 pt-12 px-30 border-[#E6EFF5]">
+        {/* <Header title={"Menu"} /> */}
+        <div className="p-4 sm:p-6 min-h-screen w-full bg-white">
+            <div className="space-y-3 md:pt-12 px-4 sm:px-8 border-[#E6EFF5]">
                 {SavePopup && (
-                    <div className={`absolute top-25 left-60 right-0 m-auto flex items-center gap-2 p-2 bg-white rounded-xl shadow-lg w-1/2 ${isFadingOut ? "animate-fade-out " : "animate-fade-in"} `}>
-                        <svg className="w-5 h-5 rounded-full bg-[#3A974C]/21 text-[#3A974C]" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    <div className={`fixed top-15 left-1/2 transform -translate-x-1/2 z-50 flex items-center gap-2 p-2 bg-white rounded-xl shadow-lg w-11/12 sm:w-1/2 ${isFadingOut ? "animate-fade-out" : "animate-fade-in"}`}>
+                        <svg className="w-5 h-5 rounded-full bg-[#3A974C]/21 text-[#3A974C]" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                         </svg>
                         <span className="text-[#3A974C] font-semibold text-sm">Created Successfully</span>
                     </div>
                 )}
+
+                {/* mobile version */}
+
                 {foodItems.map((item) => (
-                    <div key={item.id} onClick={() => handleEdit(item)} className="flex items-center justify-between py-2 px-4 shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)] rounded-md">
-                        <div className="flex items-center gap-4">
+                    <div key={item.id} onClick={() => handleEdit(item)} className="md:hidden flex flex-row items-start sm:items-center justify-between py-2 px-4 shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)] rounded-md">
+                        <div className="flex items-center gap-3 w-full">
                             <div className="w-8 h-8 rounded-full bg-[#EE6295] flex items-center justify-center">
                                 <span className="text-white text-xs"></span>
                             </div>
-                            <div className="flex flex-row flex-1">
-                                <h3 className="font-medium text-[#9E033B]">{item.title}</h3>
+                            <div className="flex-1">
+                                <h3 className="font-medium text-[#9E033B] text-sm sm:text-base">{item.title}</h3>
                             </div>
                         </div>
-                        <div className="flex items-center gap-4" >
-                            <div className="relative" >
+
+                        <div className="flex items-center gap-3 mt-2 sm:mt-0 sm:ml-4">
+                            <div className="relative">
                                 <button onClick={(e) => {
                                     e.stopPropagation();
                                     handleMoreClick(item.id);
                                 }} className="text-gray-400 hover:text-gray-600 cursor-pointer">
                                     <MoreHorizontal className="h-5 w-5 text-[#E5024E]" />
                                 </button>
-                                <AnimatePresence>
 
+                                <AnimatePresence>
                                     {openDropdownId === item.id && (
                                         <motion.div
                                             ref={menuRef}
@@ -122,34 +126,92 @@ const FoodList = () => {
                                             animate={{ opacity: 1, scale: 1 }}
                                             exit={{ opacity: 0, scale: 0.5 }}
                                             transition={{ duration: 0.5 }}
-                                            className="absolute -right-32 top-2 mt-2 w-36 bg-white p-2 rounded-lg flex flex-col gap-1 shadow-lg border border-gray-100 z-100"
+                                            className="absolute -right-2 top-2 mt-2 w-36 bg-white p-2 rounded-lg flex flex-col gap-1 shadow-lg border border-gray-100 z-50"
                                         >
-
                                             <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-
-                                                        // your logic for mark as read
-                                                    }}
-                                                    className="w-full bg-gray-50 px-2 py-2 rounded-lg text-left text-xs text-gray-700 hover:bg-gray-100 z-100 flex items-center gap-2"
-                                                >
-                                                    <img src={icons.MarkAsRead} alt="" className="h-3 w-3" />
-                                                    Mark as Read
-                                                </button>
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        // your logic for delete
-                                                    }}
-                                                    className="w-full px-2 bg-[#ee62953b] py-2 rounded-md text-left text-xs text-red-600 hover:bg-gray-100 flex items-center gap-2 z-10"
-                                                >
-                                                    <img src={icons.DeleteIcon} alt="" className="h-3 w-3" />
-                                                    Delete
-                                                </button>
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    // your logic for mark as read
+                                                }}
+                                                className="w-full bg-gray-50 px-2 py-2 rounded-lg text-left text-xs text-gray-700 hover:bg-gray-100 z-50 flex items-center gap-2"
+                                            >
+                                                <img src={icons.MarkAsRead} alt="" className="h-3 w-3" />
+                                                Mark as Read
+                                            </button>
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    // your logic for delete
+                                                }}
+                                                className="w-full px-2 bg-[#ee62953b] py-2 rounded-md text-left text-xs text-red-600 hover:bg-gray-100 flex items-center gap-2 z-50"
+                                            >
+                                                <img src={icons.DeleteIcon} alt="" className="h-3 w-3" />
+                                                Delete
+                                            </button>
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
+                            </div>
+                        </div>
+                    </div>
+                ))}
 
+
+                {/* desktop version */}
+
+                {foodItems.map((item) => (
+                    <div key={item.id} onClick={() => handleEdit(item)} className="hidden md:flex flex-col sm:flex-row items-start sm:items-center justify-between py-2 px-4 shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)] rounded-md">
+                        <div className="flex items-center gap-3 w-full">
+                            <div className="w-8 h-8 rounded-full bg-[#EE6295] flex items-center justify-center">
+                                <span className="text-white text-xs"></span>
+                            </div>
+                            <div className="flex-1">
+                                <h3 className="font-medium text-[#9E033B] text-sm sm:text-base">{item.title}</h3>
+                            </div>
+                        </div>
+
+                        <div className="flex items-center gap-3 mt-2 sm:mt-0 sm:ml-4">
+                            <div className="relative">
+                                <button onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleMoreClick(item.id);
+                                }} className="text-gray-400 hover:text-gray-600 cursor-pointer">
+                                    <MoreHorizontal className="h-5 w-5 text-[#E5024E]" />
+                                </button>
+
+                                <AnimatePresence>
+                                    {openDropdownId === item.id && (
+                                        <motion.div
+                                            ref={menuRef}
+                                            initial={{ opacity: 0, scale: 0.5 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            exit={{ opacity: 0, scale: 0.5 }}
+                                            transition={{ duration: 0.5 }}
+                                            className="absolute -right-2 top-2 mt-2 w-36 bg-white p-2 rounded-lg flex flex-col gap-1 shadow-lg border border-gray-100 z-50"
+                                        >
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    // your logic for mark as read
+                                                }}
+                                                className="w-full bg-gray-50 px-2 py-2 rounded-lg text-left text-xs text-gray-700 hover:bg-gray-100 z-50 flex items-center gap-2"
+                                            >
+                                                <img src={icons.MarkAsRead} alt="" className="h-3 w-3" />
+                                                Mark as Read
+                                            </button>
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    // your logic for delete
+                                                }}
+                                                className="w-full px-2 bg-[#ee62953b] py-2 rounded-md text-left text-xs text-red-600 hover:bg-gray-100 flex items-center gap-2 z-50"
+                                            >
+                                                <img src={icons.DeleteIcon} alt="" className="h-3 w-3" />
+                                                Delete
+                                            </button>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </div>
                         </div>
                     </div>
@@ -157,11 +219,15 @@ const FoodList = () => {
             </div>
 
             {/* Floating Icon */}
-            <div onClick={() => nav("/food-list/create-menu")} className="absolute bottom-10 bg-[#9E033B] w-20 h-20  right-10 rounded-full shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)]">
-                <img src={icons.LazeezLogo} alt="" />
+            <div
+                onClick={() => nav("/food-list/create-menu")}
+                className="fixed sm:bottom-10 sm:right-10 bottom-4 right-4 bg-[#9E033B] w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)] z-50 cursor-pointer"
+            >
+                <img src={icons.LazeezLogo} alt="+" className="w-30 md:w-30" />
             </div>
         </div>
-                </>
+
+    </>
     );
 };
 

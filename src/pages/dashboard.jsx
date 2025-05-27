@@ -104,33 +104,43 @@ export default function Dashboard() {
         );
     }
 
-    return (
-        <div className="flex w-full h-screen bg-white">
-            {/* Main Content */}
-            <div className="flex-1 overflow-auto">
-                <div className="p-6">
-                    {/* <Header title="Dashboard" /> */}
-                </div>
-                {/* Header */}
+return (
+    <div className="flex w-full min-h-screen bg-white">
+        {/* Main Content */}
+        <div className="flex-1 overflow-auto">
+            <div className="p-4 sm:p-6">
+                {/* Optional Header */}
                 {/* <Header searchQuery={searchQuery} onSearch={handleSearch} /> */}
-                {/* Dashboard Content */}
-                <div className="p-6 border-l border-[#E6EFF5]">
-                    {/* Stats Cards */}
-                    <StatsCards stats={stats} />
-                    {/* Charts Section */}
-                    <div className="flex justify-between mb-8">
+            </div>
+
+            <div className="px-4 sm:px-6 pb-6 border-l border-[#E6EFF5]">
+                {/* Stats Cards */}
+                <StatsCards stats={stats} />
+
+                {/* Charts Section */}
+                <div className="flex flex-col xl:flex-row justify-between gap-6 mb-8">
+                    <div className="w-full ">
                         <ReportsChart />
+                    </div>
+                    <div className="w-full">
                         <AnalyticsChart analyticsData={analyticsData} />
                     </div>
-                    {/* Tables Section */}
-                    <div className="flex justify-between gap-6">
+                </div>
+
+                {/* Tables Section */}
+                <div className="flex flex-col xl:flex-row justify-between gap-6">
+                    <div className="w-full xl:w-2/3">
                         <RecentOrdersTable recentOrders={recentOrders} />
+                    </div>
+                    <div className="w-full xl:w-1/3">
                         <TopPackagesList topPackages={topPackages} />
                     </div>
                 </div>
             </div>
         </div>
-    );
+    </div>
+);
+
 }
 
 // Chart Components

@@ -20,7 +20,7 @@ function CreateOffer() {
   const image = icons.LazeezImage
 
   const notifications = [
-    { id: 1, image: image, audience: "Family waly", foodCategory: "fast food", title: "Ramadan Special 10%", subTitles: "We have released the payment for your recent order.", isNew: true },
+    { id: 1, image: image, audience: "Family waly", foodCategory: "fast food", title: "Ramadan Special Ramadan Special 10%", subTitles: "We have released the payment for your recent order.", isNew: true },
     { id: 2, image: image, audience: "Dost log", foodCategory: "garm food", title: "Ramadan Special 30%", subTitles: "We had warned you about the policy violations.", isNew: false },
     { id: 3, image: image, audience: "Girl friend", foodCategory: "thanda food", title: "Eid Special", subTitles: "Some new releases at discounted prices.", isNew: true },
     { id: 4, image: image, audience: "Bary log", foodCategory: "pak food", title: "Majlis", subTitles: "We have released the payment for your recent order.", isNew: false },
@@ -105,15 +105,15 @@ function CreateOffer() {
       <div className="w-full mx-auto p-4">
         {/* <Header title={"Create an Offer"} /> */}
 
-        <div className="space-y-3 pt-12 px-30 border-[#E6EFF5]">
+        <div className="space-y-3 pt-12 md:px-30 border-[#E6EFF5]">
           {SavePopup && (
-            <div className={`absolute top-20 left-60 right-0 m-auto flex items-center gap-2 p-2 bg-white rounded-xl shadow-lg w-1/2 ${isFadingOut ? "animate-fade-out " : "animate-fade-in"} `}>
+            <div className={`absolute top-20 left-10 right-0 m-auto flex items-center gap-2 p-2 bg-white rounded-xl shadow-lg w-1/2 ${isFadingOut ? "animate-fade-out " : "animate-fade-in"} `}>
               <svg className="w-5 h-5 rounded-full bg-[#3A974C]/21 text-[#3A974C]" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
               </svg>
               <span className="text-[#3A974C] font-semibold text-sm">Save</span>
             </div>
-          )}
+           )}
           {notifications.map((notification) => (
             <div onClick={handleDetail(notification)} key={notification.id} className="flex items-center justify-between py-2 px-4 shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)] rounded-md">
               <div className="flex items-center gap-4">
@@ -147,7 +147,7 @@ function CreateOffer() {
                       >
 
                   <div
-                    className="absolute -right-10 mt-2 w-36 bg-white p-2 rounded-lg flex flex-col gap-1 shadow-lg border border-gray-100 z-10"
+                    className="absolute -right-4 mt-2 w-36 bg-white p-2 rounded-lg flex flex-col gap-1 shadow-lg border border-gray-100 z-10"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <button
@@ -186,7 +186,7 @@ function CreateOffer() {
       </div>
       {SuccessPopup && (
         <div className={`fixed inset-0 z-50 flex items-center justify-center bg-[#0000003a] bg-opacity-30 ${isFadingOut ? "animate-fade-out " : "animate-fade-in"}`}>
-          <div className="bg-[#FDCBCB] p-6 rounded-xl text-center w-[20%] max-w-sm shadow-lg animate-fadeIn">
+          <div className="bg-[#FDCBCB] p-6 rounded-xl text-center lg:w-[20%] w-70 max-w-sm shadow-lg animate-fadeIn">
             <div className="flex justify-center mb-4">
               <div className="bg-[#ED004F] p-3 rounded-full">
                 <svg
@@ -209,11 +209,7 @@ function CreateOffer() {
             </p>
           </div>
         </div>
-      )}
-
-
-
-
+       )}
     </div>
   )
 }

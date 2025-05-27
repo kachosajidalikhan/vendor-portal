@@ -130,50 +130,60 @@ function CreatePackage() {
 
   return (
     <div className="w-full min-h-screen bg-white p-4">
-      {/* <Header title={"Create a Package"} /> */}
-      <div className="w-full mx-auto p-4">
-        <div className="space-y-3 pt-12 px-30 border-[#E6EFF5]">
-          {packages.map((packageItem) => (
-            <div
-              key={packageItem.id}
-              className="flex items-center justify-between py-2 px-4 shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)] rounded-md cursor-pointer hover:bg-gray-50"
-              onClick={() => handlePackageClick(packageItem)}
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center">
-                  <span className="text-white text-xs"></span>
+      {/* Container */}
+      <div className="max-w-5xl mx-auto p-4">
+        {/* Package List */}
+        <div className="space-y-3 pt-12 px-4 sm:px-6 md:px-8 border border-[#E6EFF5] rounded-lg">
+          {packages.length === 0 ? (
+            <p className="text-center text-gray-400 py-8">No packages available.</p>
+          ) : (
+            packages.map((packageItem) => (
+              <div
+                key={packageItem.id}
+                className="flex items-center justify-between py-3 px-4 shadow-md rounded-md cursor-pointer hover:bg-gray-50 transition"
+                onClick={() => handlePackageClick(packageItem)}
+              >
+                <div className="flex items-center gap-4 flex-1 min-w-0">
+                  <div className="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center flex-shrink-0">
+                    {/* You had empty span, maybe add initials or icon */}
+                    <span className="text-white text-sm font-semibold truncate">
+                      {packageItem.title?.charAt(0).toUpperCase()}
+                    </span>
+                  </div>
+                  <h3 className="font-medium text-[#9E033B] truncate">{packageItem.title}</h3>
                 </div>
-                <div className="flex flex-row flex-1">
-                  <h3 className="font-medium text-[#9E033B]">{packageItem.title}</h3>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="relative" ref={menuRef}>
+
+                <div className="flex items-center gap-2 relative" ref={menuRef}>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       toggleMenu(packageItem.id);
                     }}
-                    className="text-gray-400 hover:text-gray-600 cursor-pointer"
+                    className="text-[#E5024E] hover:text-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-300 rounded"
+                    aria-haspopup="true"
+                    aria-expanded={activeMenu === packageItem.id}
+                    aria-label="Open package menu"
                   >
-                    <MoreHorizontal className="h-5 w-5 text-[#E5024E]" />
+                    <MoreHorizontal className="h-5 w-5" />
                   </button>
 
                   <AnimatePresence>
                     {activeMenu === packageItem.id && showPopup && (
                       <motion.div
-                        ref={menuRef}
                         initial={{ opacity: 0, scale: 0.5 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.5 }}
-                        transition={{ duration: 0.5 }}
-                        className="absolute -right-10 top-2 mt-2 w-36 bg-white p-2 rounded-lg flex flex-col gap-1 shadow-lg border border-gray-100 z-10"
+                        transition={{ duration: 0.3 }}
+                        className="absolute right-0 top-full mt-2 w-36 bg-white p-2 rounded-lg flex flex-col gap-1 shadow-lg border border-gray-100 z-20"
                       >
                         <button
-                          onClick={handleDelete}
-                          className="w-full px-2 bg-[#ee62953b] py-2 rounded-md text-left text-xs text-red-600 hover:bg-gray-50 flex items-center gap-2 z-10"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDelete();
+                          }}
+                          className="w-full px-2 py-2 rounded-md text-left text-xs text-red-600 hover:bg-gray-50 flex items-center gap-2"
                         >
-                          <img src={icons.DeleteIcon} alt="" className="h-3 w-3" />
+                          <img src={icons.DeleteIcon} alt="Delete icon" className="h-4 w-4" />
                           Delete
                         </button>
                       </motion.div>
@@ -181,21 +191,41 @@ function CreatePackage() {
                   </AnimatePresence>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
-        {/* create button */}
+
+
+        {/* Floating Create Button */}
         <div
           onClick={handleCreatePackage}
-          className="absolute bottom-10 cursor-pointer bg-[#EA3270] hover:bg-pink-600 w-20 h-20 right-10 rounded-full shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)] flex items-center justify-center"
+          className="
+    fixed bottom-6 left-1/2 transform -translate-x-1/2 
+    md:bottom-10 md:right-10 md:left-auto md:transform-none
+    w-16 h-16 md:w-20 md:h-20 bg-[#EA3270] hover:bg-pink-600 
+    rounded-full shadow-lg flex items-center justify-center 
+    cursor-pointer transition
+  "
+          aria-label="Create a new package"
+          role="button"
         >
-          <img src={icons.LazeezLogo} alt="Create Package" />
+          <img
+            src={icons.LazeezLogo}
+            alt="Create Package"
+            className="w-8 h-8 md:w-10 md:h-10"
+            draggable={false}
+          />
         </div>
+
       </div>
-      {/* Create Package Success Popup */}
-      {SuccessPopup && (
-        <div className={`fixed inset-0 z-50 flex items-center justify-center bg-[#0000003a] bg-opacity-30 ${isFadingOut ? "animate-fade-out " : "animate-fade-in"}`}>
-          <div className="bg-[#FDCBCB] p-6 rounded-xl text-center w-[20%] max-w-sm shadow-lg animate-fadeIn">
+
+      {/* Popups */}
+      {(SuccessPopup || UpdatePopup) && (
+        <div
+          className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 bg-opacity-30 ${isFadingOut ? "animate-fade-out" : "animate-fade-in"
+            }`}
+        >
+          <div className="bg-[#FDCBCB] p-6 rounded-xl text-center w-11/12 max-w-sm sm:w-96 shadow-lg">
             <div className="flex justify-center mb-4">
               <div className="bg-[#ED004F] p-3 rounded-full">
                 <svg
@@ -210,44 +240,21 @@ function CreatePackage() {
               </div>
             </div>
             <h2 className="text-lg font-semibold text-black mb-2">
-              Your package is created successfully!
+              {SuccessPopup
+                ? "Your package is created successfully!"
+                : "Package updated successfully!"}
             </h2>
             <p className="text-sm text-[#1E1500]">
-              Get ready to offer an exceptional experience tailored to your customers' needs. Stay tuned for updates as orders start rolling in!
-            </p>
-          </div>
-        </div>
-      )}
-
-
-      {/* Update Package Success Popup */}
-      {UpdatePopup && (
-        <div className={`fixed inset-0 z-50 flex items-center justify-center bg-[#0000003a] bg-opacity-30 ${isFadingOut ? "animate-fade-out " : "animate-fade-in"}`}>
-          <div className="bg-[#FDCBCB] p-6 rounded-xl text-center w-[20%] max-w-sm shadow-lg animate-fadeIn">
-            <div className="flex justify-center mb-4">
-              <div className="bg-[#ED004F] p-3 rounded-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-8 w-8 text-white"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-            </div>
-            <h2 className="text-lg font-semibold text-black mb-2">
-              Package updated successfully!
-            </h2>
-            <p className="text-sm text-[#1E1500]">
-              Your package has been updated with the latest information. The changes will be reflected immediately for your customers.
+              {SuccessPopup
+                ? "Get ready to offer an exceptional experience tailored to your customers' needs. Stay tuned for updates as orders start rolling in!"
+                : "Your package has been updated with the latest information. The changes will be reflected immediately for your customers."}
             </p>
           </div>
         </div>
       )}
     </div>
-  )
+  );
+
 }
 
 export default CreatePackage

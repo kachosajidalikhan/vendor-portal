@@ -2,7 +2,7 @@ import CircleProgress from "./CircleProgress";
 
 export default function AnalyticsChart({ analyticsData }) {
   return (
-    <div className="px-6">
+    <div className="px-4">
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-lg font-bold text-pink-600 poppins">Analytics</h3>
         <button className="text-gray-400 text-xl">⋯</button>

@@ -221,125 +221,155 @@ export default function Chats() {
   }
 
   return (
-    <div className="bg-white w-full min-h-screen p-6">
-      {/* <Header title="Chats" /> */}
+    <div className="bg-white w-full min-h-screen p-4 sm:p-6 overflow-x-auto">
       <div className="max-w-7xl mx-auto">
-        <div className="bg-white border-l border-[#E6EFF5] pt-15">
-          <table className="w-full">
-            <thead>
-              <tr className="text-left text-sm">
-                <th className="p-4 font-medium text-gray-500">
-                  <input type="checkbox" checked={selectAll} onChange={handleSelectAll} className="rounded border-gray-300 accent-[#E5024E]" />
-                </th>
-                <th className="p-4 font-medium text-[#EE6295]">
-                  Order ID <span className="text-[#EE6295] text-xs">▼</span>
-                </th>
-                <th className="p-4 font-medium text-[#EE6295]">
-                  Name <span className="text-[#EE6295] text-xs">▼</span>
-                </th>
-                <th className="p-4 font-medium text-[#EE6295]">
-                  Description <span className="text-[#EE6295] text-xs">▼</span>
-                </th>
-                <th className="p-4 font-medium text-[#EE6295]">
-                  Status <span className="text-[#EE6295] text-xs">▼</span>
-                </th>
-                <th className="p-4 font-medium text-[#EE6295]">
-                  {/* <Trash2 className="h-5 w-5 text-[#EE6295]" /> */}
-                  <img src={icons.DeleteIcon} alt="" className="h-5 w-5" />
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order) => (
-                <tr
-                  key={order.id}
-                  className="hover:shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)] duration-200 rounded-lg cursor-pointer"
-                  onClick={() => handleChatClick(order)}
-                >
-                  <td className="p-4" onClick={(e) => e.stopPropagation()}>
-                    <input
-                      type="checkbox"
-                      checked={order.selected}
-                      onChange={() => toggleSelect(order.id)}
-                      className="rounded border-gray-300 accent-[#E5024E]"
-                    />
-                  </td>
-                  <td className="p-4 text-sm font-medium">{order.id}</td>
-                  <td className="p-4">
-                    <div className="flex items-center gap-2">
-                      <div className="h-8 w-8 rounded-full overflow-hidden bg-gray-200">
-                      </div>
-                      <span className="text-sm font-medium text-pink-600">{order.name}</span>
-                    </div>
-                  </td>
-                  <td className="p-4">
-                    <div className="flex items-center gap-2">
-                      <div className="p-1 rounded">
-                        <img src={icons.Message} alt="" className="w-3 h-3" />
-                      </div>
-                      <span className="text-sm text-gray-600">{order.description.split(' ').slice(0, 4).join(' ')}...</span>
-                    </div>
-                  </td>
-                  <td className="p-4">
-                    {order.isNew && (
-                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-pink-100 text-pink-800">
-                        New
-                      </span>
-                    )}
-                  </td>
-                  <td className="p-4" onClick={(e) => e.stopPropagation()}>
-                    <div className="flex items-center gap-4">
 
-                      <div className="relative">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleMoreClick(order.id);
-                          }}
-                          className="focus:outline-none cursor-pointer"
-                        >
-                          <MoreHorizontal className="h-5 w-5 text-[#E5024E] z-5" />
-                        </button>
-                        <AnimatePresence>
-
-                        {openDropdownId === order.id && (
-                          <motion.div
+        {/* MOBILE & TABLET VERSION */}
+        <div className="block lg:hidden">
+          <h2 className="text-2xl font-bold text-[#E5024E] mb-4">Chats</h2>
+          <div className="space-y-4">
+            {orders.map((order) => (
+              <div
+                key={order.id}
+                onClick={() => handleChatClick(order)}
+                className="flex items-center justify-between bg-white px-4 py-3 rounded-xl shadow-md"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="h-8 w-8 rounded-full overflow-hidden bg-gray-200" />
+                  <div className="flex flex-col">
+                    <span className="text-sm font-bold text-[#E5024E]">{order.name}</span>
+                    <span className="text-xs sm:text-sm text-gray-600">
+                          {order.description.split(' ').slice(0, 2).join(' ')}...
+                        </span>
+                  </div>
+                </div>
+                <div className="flex flex-row gap-4 items-end">
+                  {order.isNew && (
+                  <span className="bg-pink-100 text-pink-800 text-xs px-3 py-1 rounded-full">New</span>
+                  )}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleMoreClick(order.id);
+                    }}
+                    className="mt-2"
+                  >
+                    <MoreHorizontal className="h-5 w-5 text-[#E5024E]" />
+                  </button>
+                  <AnimatePresence>
+                    {openDropdownId === order.id && (
+                      <motion.div
                         ref={menuRef}
                         initial={{ opacity: 0, scale: 0.5 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.5 }}
-                        transition={{ duration: 0.5 }}
-                        className="absolute -right-10 top-2 mt-2 w-36 bg-white p-2 rounded-lg flex flex-col gap-1 shadow-lg border border-gray-100 z-10"
+                        transition={{ duration: 0.3 }}
+                        className="absolute right-4 mt-10 w-36 bg-white p-2 rounded-lg shadow-lg border border-gray-100 z-10"
                       >
-
-                          
-                            <button
-                              onClick={() => handleMarkAsRead(order.id)}
-                              className="w-full hover:bg-[#f0f0f0] hover:text-[#DB024D] bg-gray-50 px-2 py-2 rounded-lg text-left text-xs text-gray-700 flex items-center gap-2 z-10"
-                            >
-                              <img src={icons.MarkAsRead} alt="" className="h-3 w-3" />
-                              Mark as Read
-                            </button>
-                            <button
-                              onClick={() => handleDelete(order.id)}
-                              className="w-full px-2 bg-[#ee62953b] py-2 rounded-md text-left text-xs text-red-600 hover:bg-gray-50 flex items-center gap-2 z-10"
-                            >
-                              <img src={icons.DeleteIcon} alt="" className="h-3 w-3" />
-                              Delete
-                            </button>
-                        
-                              </motion.div>
-                        )}
-                              </AnimatePresence>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                        <button
+                          onClick={() => handleMarkAsRead(order.id)}
+                          className="w-full hover:bg-[#f0f0f0] hover:text-[#DB024D] bg-gray-50 px-2 py-2 rounded-lg text-left text-xs text-gray-700 flex items-center gap-2"
+                        >
+                          <img src={icons.MarkAsRead} alt="" className="h-3 w-3" />
+                          Mark as Read
+                        </button>
+                        <button
+                          onClick={() => handleDelete(order.id)}
+                          className="w-full px-2 bg-[#ee62953b] py-2 rounded-md text-left text-xs text-red-600 hover:bg-gray-50 flex items-center gap-2"
+                        >
+                          <img src={icons.DeleteIcon} alt="" className="h-3 w-3" />
+                          Delete
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
+
+        {/* DESKTOP VERSION */}
+        <div className="hidden lg:block">
+          <div className="bg-white border-l border-[#E6EFF5] pt-10">
+            <table className="w-full min-w-[700px] sm:min-w-full">
+              <thead>
+                <tr className="text-left text-xs sm:text-sm">
+                  <th className="p-2 sm:p-4 font-medium text-gray-500">
+                    <input
+                      type="checkbox"
+                      checked={selectAll}
+                      onChange={handleSelectAll}
+                      className="rounded border-gray-300 accent-[#E5024E]"
+                    />
+                  </th>
+                  <th className="p-2 sm:p-4 font-medium text-[#EE6295]">Order ID</th>
+                  <th className="p-2 sm:p-4 font-medium text-[#EE6295]">Name</th>
+                  <th className="p-2 sm:p-4 font-medium text-[#EE6295]">Description</th>
+                  <th className="p-2 sm:p-4 font-medium text-[#EE6295]">Status</th>
+                  <th className="p-2 sm:p-4 font-medium text-[#EE6295]">
+                    <img src={icons.DeleteIcon} alt="" className="h-5 w-5" />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map((order) => (
+                  <tr
+                    key={order.id}
+                    onClick={() => handleChatClick(order)}
+                    className="hover:shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)] duration-200 rounded-lg cursor-pointer"
+                  >
+                    <td className="p-2 sm:p-4" onClick={(e) => e.stopPropagation()}>
+                      <input
+                        type="checkbox"
+                        checked={order.selected}
+                        onChange={() => toggleSelect(order.id)}
+                        className="rounded border-gray-300 accent-[#E5024E]"
+                      />
+                    </td>
+                    <td className="p-2 sm:p-4 text-xs sm:text-sm font-medium">{order.id}</td>
+                    <td className="p-2 sm:p-4">
+                      <div className="flex items-center gap-2">
+                        <div className="h-8 w-8 rounded-full overflow-hidden bg-gray-200" />
+                        <span className="text-xs sm:text-sm font-medium text-pink-600">{order.name}</span>
+                      </div>
+                    </td>
+                    <td className="p-2 sm:p-4">
+                      <div className="flex items-center gap-2">
+                        <img src={icons.Message} alt="" className="w-3 h-3" />
+                        <span className="text-xs sm:text-sm text-gray-600">
+                          {order.description.split(' ').slice(0, 4).join(' ')}...
+                        </span>
+                      </div>
+                    </td>
+                    <td className="p-2 sm:p-4">
+                      {order.isNew && (
+                        <span className="px-2 sm:px-3 py-1 rounded-full text-xs font-medium bg-pink-100 text-pink-800">
+                          New
+                        </span>
+                      )}
+                    </td>
+                    <td className="p-2 sm:p-4" onClick={(e) => e.stopPropagation()}>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleMoreClick(order.id);
+                        }}
+                      >
+                        <MoreHorizontal className="h-5 w-5 text-[#E5024E]" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
     </div>
+
+
+
   )
 } 

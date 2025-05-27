@@ -4,7 +4,9 @@ import { Outlet, useLocation, NavLink } from "react-router-dom";
 import { useMemo } from "react";
 
 export default function Header({ title, lazeez, isSidebarOpen, toggleSidebar }) {
+  // const location = useLocation();
   const location = useLocation();
+  const pathname = location.pathname;
 
   const pageTitles = {
     "/": "Dashboard",
@@ -13,7 +15,7 @@ export default function Header({ title, lazeez, isSidebarOpen, toggleSidebar }) 
     "/chats": "Chats",
     "/chats/messages": "Chat Messages",
     "/notifications": "Notifications",
-    "/lazeez-notifications": "Lazeez Notifications",
+    "/lazeez-notifications": "Notifications By",
     "/create-package": "Create Package",
     "/create-package/package-creation": "Package Creation",
     "/create-package/edit-package": "Edit Package",
@@ -43,6 +45,7 @@ export default function Header({ title, lazeez, isSidebarOpen, toggleSidebar }) 
 
     return pageTitles[currentPath] || "Dashboard";
   }, [currentPath]);
+  const isLazeezNotification = pathname.startsWith("/lazeez-notifications");
 
   return (
     <div className="w-full">
@@ -60,10 +63,8 @@ export default function Header({ title, lazeez, isSidebarOpen, toggleSidebar }) 
           {/* Page Title */}
           <h2 className="lg:text-2xl text-[16px] Poppins-bold text-white lg:text-pink-600 ml-1">
             {pageTitle}{" "}
-            {lazeez && (
-              <span className="lg:text-2xl text-lg Sunkids text-black">
-                {lazeez}
-              </span>
+            {isLazeezNotification && (
+              <p className="text-lg text-black Sunkids leading-5">Lazeez Event</p>
             )}
           </h2>
         </div>

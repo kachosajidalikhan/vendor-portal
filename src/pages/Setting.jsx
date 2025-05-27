@@ -16,17 +16,17 @@ const mockVendorData = {
   profileImage: null,
   businessTypes: ["Catering", "Restaurant", "Home Chef", "Cafe", "Bakery"],
   cities: [
-  "Karachi",
-  "Lahore",
-  "Islamabad",
-  "Faisalabad",
-  "Peshawar",
-  "Quetta",
-  "Multan",
-  "Rawalpindi",
-  "Hyderabad",
-  "Sialkot"
-]
+    "Karachi",
+    "Lahore",
+    "Islamabad",
+    "Faisalabad",
+    "Peshawar",
+    "Quetta",
+    "Multan",
+    "Rawalpindi",
+    "Hyderabad",
+    "Sialkot"
+  ]
 };
 
 export default function Settings() {
@@ -97,9 +97,9 @@ export default function Settings() {
 
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col md:flex-row gap-8 mb-8">
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 mx-auto md:mx-0">
               <div className="relative">
-                <div className="w-24 h-24 rounded-full bg-sky-100 overflow-hidden relative">
+                <div className="w-24 h-24 md:w-24 md:h-24 w-20 h-20 rounded-full bg-sky-100 overflow-hidden relative">
                   {formData.profileImage ? (
                     <img
                       src={formData.profileImage}
@@ -128,107 +128,105 @@ export default function Settings() {
               </div>
             </div>
 
-            <div className="flex-grow">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-36 gap-y-6">
-                <div className="space-y-0">
-                  <div htmlFor="vendorName" className="text-[#ED004F] text-sm pb-1">Vendor Name</div>
-                  <input
-                    id="vendorName"
-                    name="vendorName"
-                    value={formData.vendorName}
-                    onChange={handleChange}
-                    className="rounded-xl w-[318px] h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                  />
-                </div>
-                <div className="space-y-0">
-                  <div htmlFor="businessType" className="text-[#ED004F] text-sm pb-1">Business Type</div>
-                  <select
-                    id="businessType"
-                    name="businessType"
-                    value={formData.businessType}
-                    onChange={handleChange}
-                    className="rounded-xl w-[318px] h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                  >
-                    {mockVendorData.businessTypes.map((type) => (
-                      <option key={type} value={type}>
-                        {type}
-                      </option>
-                    ))}
-                  </select>
-                </div>
 
-                <div className="space-y-0">
-                  <div htmlFor="userName" className="text-[#ED004F] text-sm pb-1">Username</div>
-                  <input
-                    id="userName"
-                    name="userName"
-                    value={formData.username}
-                    onChange={handleChange}
-                    className="rounded-xl w-[318px] h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                  />
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:gap-x-26 gap-x-10 gap-y-6">
+              <div className="space-y-0">
+                <label htmlFor="vendorName" className="text-[#ED004F] text-sm pb-1 block">Vendor Name</label>
+                <input
+                  id="vendorName"
+                  name="vendorName"
+                  value={formData.vendorName}
+                  onChange={handleChange}
+                  className="rounded-xl w-full lg:w-[318px] md:w-[250px] max-w-sm h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                />
+              </div>
 
-                <div className="space-y-0">
-                  <div htmlFor="password" className="text-[#ED004F] text-sm pb-1">Password</div>
-                  <input
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    className="rounded-xl w-[318px] h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                  />
-                </div>
-                <div className="space-y-0">
-                  <div htmlFor="address" className="text-[#ED004F] text-sm pb-1">Present Address</div>
-                  <input
-                    id="address"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleChange}
-                    className="rounded-xl w-[318px] h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                  />
-                </div>
+              <div className="space-y-0">
+                <label htmlFor="businessType" className="text-[#ED004F] text-sm pb-1 block">Business Type</label>
+                <select
+                  id="businessType"
+                  name="businessType"
+                  value={formData.businessType}
+                  onChange={handleChange}
+                  className="rounded-xl w-full lg:w-[318px] md:w-[250px] max-w-sm h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                >
+                  {mockVendorData.businessTypes.map((type) => (
+                    <option key={type} value={type}>{type}</option>
+                  ))}
+                </select>
+              </div>
 
-                <div className="space-y-0">
-                  <div htmlFor="city" className="text-[#ED004F] text-sm pb-1">City</div>
-                  <select
-                    id="city"
-                    name="city"
-                    value={formData.city}
-                    onChange={handleChange}
-                    className="rounded-xl w-[318px] h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                  >
-                    {mockVendorData.cities.map((city) => (
-                      <option key={city} value={city}>
-                        {city}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+              <div className="space-y-0">
+                <label htmlFor="userName" className="text-[#ED004F] text-sm pb-1 block">Username</label>
+                <input
+                  id="userName"
+                  name="userName"
+                  value={formData.username}
+                  onChange={handleChange}
+                  className="rounded-xl w-full lg:w-[318px] max-w-sm h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                />
+              </div>
 
-                <div className="space-y-0">
-                  <div htmlFor="totalWorkers" className="text-[#ED004F] text-sm pb-1">Total workers</div>
-                  <input
-                    id="totalWorkers"
-                    name="totalWorkers"
-                    value={formData.totalWorkers}
-                    onChange={handleChange}
-                    className="rounded-xl w-[318px] h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                  />
-                </div>
+              <div className="space-y-0">
+                <label htmlFor="password" className="text-[#ED004F] text-sm pb-1 block">Password</label>
+                <input
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="rounded-xl w-full lg:w-[318px] max-w-sm h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                />
+              </div>
 
-                <div className="space-y-0">
-                  <div htmlFor="postalCode" className="text-[#ED004F] text-sm pb-1">Postal Code</div>
-                  <input
-                    id="postalCode"
-                    name="postalCode"
-                    value={formData.postalCode}
-                    onChange={handleChange}
-                    className="rounded-xl w-[318px] h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                  />
-                </div>
+              <div className="space-y-0">
+                <label htmlFor="address" className="text-[#ED004F] text-sm pb-1 block">Present Address</label>
+                <input
+                  id="address"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  className="rounded-xl w-full lg:w-[318px] max-w-sm h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                />
+              </div>
+
+              <div className="space-y-0">
+                <label htmlFor="city" className="text-[#ED004F] text-sm pb-1 block">City</label>
+                <select
+                  id="city"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  className="rounded-xl w-full lg:w-[318px] max-w-sm h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                >
+                  {mockVendorData.cities.map((city) => (
+                    <option key={city} value={city}>{city}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="space-y-0">
+                <label htmlFor="totalWorkers" className="text-[#ED004F] text-sm pb-1 block">Total Workers</label>
+                <input
+                  id="totalWorkers"
+                  name="totalWorkers"
+                  value={formData.totalWorkers}
+                  onChange={handleChange}
+                  className="rounded-xl w-full lg:w-[318px] max-w-sm h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                />
+              </div>
+
+              <div className="space-y-0">
+                <label htmlFor="postalCode" className="text-[#ED004F] text-sm pb-1 block">Postal Code</label>
+                <input
+                  id="postalCode"
+                  name="postalCode"
+                  value={formData.postalCode}
+                  onChange={handleChange}
+                  className="rounded-xl w-full lg:w-[318px] max-w-sm h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                />
               </div>
             </div>
+
           </div>
 
           <div className="flex justify-end items-center gap-5 mt-8">
@@ -240,9 +238,8 @@ export default function Settings() {
             <button
               type="submit"
               disabled={isLoading || !isEditing}
-              className={`bg-[#E5024E] text-white px-14 py-2 rounded-xl cursor-pointer ${
-                (isLoading || !isEditing) ? 'cursor-not-allowed' : 'hover:bg-pink-600 opacity-50 '
-              }`}
+              className={`bg-[#E5024E] text-white px-14 py-2 rounded-xl cursor-pointer ${(isLoading || !isEditing) ? 'cursor-not-allowed' : 'hover:bg-pink-600 opacity-50 '
+                }`}
             >
               {isLoading ? 'Saving...' : 'Save'}
             </button>

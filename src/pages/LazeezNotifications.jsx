@@ -60,7 +60,84 @@ function LazeezNotifications() {
       <div className="w-full mx-auto p-4">
         {/* <Header title="Notifications By" lazeez='Lazeez Events' /> */}
 
-        <div className="space-y-3 w-full pt-12 px-30 border-l border-[#E6EFF5]">
+        {/* mobile version */}
+
+        <div className="block md:hidden space-y-3">
+          {notifications.map((notification) => (
+            <div
+              key={notification.id}
+              className="flex items-center justify-between py-2 px-2 shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)] rounded-md"
+            >
+              <div className="flex w-fit items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-pink-500 flex items-center justify-center">
+                  <span className="text-white text-xs"></span>
+                </div>
+                <div>
+
+                <div className="flex flex-row flex-1">
+                  <h3 className="Poppins-bold text-sm text-[#9E033B]">{notification.title.split(' ').slice(0, 2).join(' ')}</h3>
+                </div>
+                <p className="text-[#bf064499] text-sm w-fit truncate">
+                  {notification.description.split(' ').slice(0, 2).join(' ')}...
+                </p>
+                </div>
+              </div>
+
+
+              <div className="flex items-center justify-end gap-4 w-[20%]">
+                {notification.isNew && (
+                  <span className="px-2 py-1 bg-pink-100 text-pink-500 text-xs rounded-full whitespace-nowrap">
+                    New
+                  </span>
+                )}
+
+                <div className="relative">
+                  <button
+                    onClick={() => toggleMenu(notification.id)}
+                    className="text-gray-400 hover:text-gray-600 cursor-pointer"
+                  >
+                    <MoreHorizontal className="h-5 w-5 text-[#E5024E]" />
+                  </button>
+
+                  <AnimatePresence>
+                    {activeMenu === notification.id && showPopup && (
+                      <motion.div
+                        ref={popupRef}
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.5 }}
+                        transition={{ duration: 0.5 }}
+                        className="absolute -right-3 top-5 mt-2 w-36 bg-white p-2 rounded-lg flex flex-col gap-1 shadow-lg border border-gray-100 z-10"
+                      >
+                        <button
+                          onClick={handleMarkAsRead}
+                          className="w-full bg-gray-50 px-2 py-2 rounded-lg text-left text-xs text-gray-700 flex items-center gap-2 transition-all duration-200 hover:bg-[#f0f0f0] hover:text-[#DB024D]"
+                        >
+                          <img src={icons.MarkAsRead} alt="" className="h-3 w-3" />
+                          Mark as Read
+                        </button>
+                        <button
+                          onClick={handleDelete}
+                          className="w-full px-2 bg-[#ee62953b] py-2 rounded-md text-left text-xs text-red-600 hover:bg-gray-50 flex items-center gap-2 z-10"
+                        >
+                          <img src={icons.DeleteIcon} alt="" className="h-3 w-3" />
+                          Delete
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+
+
+{/* desktop version */}
+
+        <div className="hidden md:block space-y-3 w-full pt-12 px-30 border-l border-[#E6EFF5]">
           {notifications.map((notification) => (
             <div
               key={notification.id}

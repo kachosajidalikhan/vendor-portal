@@ -54,19 +54,19 @@ const EditMenuPage = () => {
 
     return (
         <div className="w-full min-h-screen bg-white">
-            <div className="w-full mx-auto p-4">
+            <div className="w-full mx-auto md:p-4">
                 {/* <Header title="Edit Menu" /> */}
 
                 <div className="flex justify-center items-center min-h-screen px-4 py-6 bg-white relative">
-                    <button onClick={() => navigate(-1)} className="absolute left-4 top-4 text-pink-600">
+                    <button onClick={() => navigate(-1)} className="absolute left-4 top-0 text-pink-600">
                         <ArrowLeft />
                     </button>
 
-                    <div className="w-full max-w-md border-x border-[#EE6295] px-6 py-4">
+                    <div className="w-full max-w-md md:border-x border-[#EE6295] px-6 py-4">
                         {/* Image Upload */}
                         <div className="w-full flex justify-center mb-6">
                             <label className="relative cursor-pointer">
-                                <div className="w-[310px] h-[222px] bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden">
+                                <div className="md:w-[310px] md:h-[222px] w-[220px] h-[170px] bg-gray-200 rounded-lg flex items-center justify-center overflow-hidden">
                                     {imagePreview ? (
                                         <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
                                     ) : (
@@ -163,7 +163,7 @@ const EditMenuPage = () => {
                             <div className="flex justify-center mt-6">
                                 <button
                                     type="submit"
-                                    className="w-1/2 bg-[#E5024E] text-white font-semibold py-2 rounded-xl mt-4 hover:bg-pink-700 transition"
+                                    className="text-sm md:text-lg w-1/2 bg-[#E5024E] text-white Poppins-bold py-2 rounded-xl mt-4 hover:bg-pink-700 transition"
                                 >
                                     Save Changes
                                 </button>

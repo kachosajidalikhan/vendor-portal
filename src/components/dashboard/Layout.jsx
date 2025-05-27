@@ -29,7 +29,7 @@ const DashboardLayout = () => {
                     absolute lg:static top-0 -left-2 h-full bg-white shadow-md z-50
                     transform transition-transform duration-300 ease-in-out
                     ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
-                    lg:translate-x-0 lg:block w-[250px]
+                    lg:translate-x-0 lg:block w-full
                 `}
             >
                 <Sidebar onLinkClick={() => setIsSidebarOpen(false)} />

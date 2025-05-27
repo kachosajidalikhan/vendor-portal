@@ -1,7 +1,22 @@
 import { useEffect, useState } from "react"
-import { MoveRight, Badge, MoreHorizontal, Search } from "lucide-react"
+import { MoveRight, Badge, MoreHorizontal, Search, Download } from "lucide-react"
 import icons from "../constants"
-import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
+// import { ResponsiveContainer, PieChart, Pie, Cell,BarChart, CartesianGrid, } from 'recharts'
+import {
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer
+} from 'recharts'
 import Header from "../components/Header"
 import { useNavigate } from "react-router-dom"
 // import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -16,6 +31,15 @@ const statistics = {
   engaged: 3333,
   conversion: 12,
 }
+const defaultMonthlyData = [
+  { month: "Jul", Income: 120 },
+  { month: "Aug", Income: 340 },
+  { month: "Sep", Income: 250 },
+  { month: "Oct", Income: 480 },
+  { month: "Nov", Income: 780 },
+  { month: "Dec", Income: 240 },
+  { month: "Jan", Income: 580 }
+]
 
 // Top Selling Packages
 const topPackages = [
@@ -32,6 +56,13 @@ const topPackages = [
     image: icons.LazeezImage,
   },
 ]
+
+const defaultRecentIncome = [
+  { name: "Package 1", date: "28 January 2025", amount: "+Rs. 230k" },
+  { name: "Walima", date: "28 January 2025", amount: "+Rs. 20k" },
+  { name: "Grand Walima", date: "28 January 2025", amount: "+Rs. 100k" }
+]
+
 
 // Activity
 const activity = {
@@ -73,12 +104,38 @@ const packageData = [
   { name: "Other", value: 35 },
 ]
 
+const defaultWeeklyData = [
+  { day: "Sat", orders: 450, packages: 230 },
+  { day: "Sun", orders: 340, packages: 120 },
+  { day: "Mon", orders: 310, packages: 250 },
+  { day: "Tue", orders: 460, packages: 350 },
+  { day: "Wed", orders: 140, packages: 240 },
+  { day: "Thu", orders: 380, packages: 230 },
+  { day: "Fri", orders: 390, packages: 320 }
+]
+const defaultPaymentHistory = [
+  {
+    description: "Package 1",
+    orderId: "#12548796",
+    type: "COD",
+    date: "28 Jan, 12:30 AM",
+    amount: "+Rs. 2,000",
+    receipt: true
+  }
+]
+
 export default function Analytics({
   mockStatistics = statistics,
   mockTopPackages = topPackages,
   mockActivity = activity,
+  recentIncome = defaultRecentIncome,
   mockRecentOrders = recentOrders,
-  mockPackageData = packageData }) {
+  mockPackageData = packageData,
+  paymentHistory = defaultPaymentHistory,
+  mockWeeklyData = defaultWeeklyData,
+  monthlyData = defaultMonthlyData,
+  weeklyData = defaultWeeklyData,
+}) {
   const COLORS = ["#9E033B", "#ED004F", "#f48fb1", "#f8bbd0"]
 
   const nav = useNavigate()
@@ -119,50 +176,67 @@ export default function Analytics({
   // }, [])
 
   return (
-    <div className="w-full min-h-screen bg-white p-6">
+    <div className="w-full min-h-screen bg-white lg:p-6">
       {/* Header */}
       {/* <Header title={'Analytics'}/> */}
-     
+
       <div className="container mx-auto p-4">
         {/* Statistics Section */}
         <div className="lg:col-span-2">
-          <div className=" rounded-xl py-6 -mb-6 flex flex-col gap-4">
+
+
+          <div className="rounded-xl py-6 -mb-6 flex flex-col gap-4">
             <div className="flex items-center justify-between mb-2">
               <h2 className="text-xl font-bold text-[#e91e63]">Offer 1 Statistics</h2>
             </div>
-            <div className="flex flex-col gap-1 ">
-              <div className="flex bg-[#FFF5F6] rounded-lg pl-2 py-1 gap-35 justify-between w-180 shadow-lg">
-                <div className="flex gap-5">
+
+            <div className="flex flex-col gap-2 mb-4">
+              {/* Top Labels Section */}
+              <div className="flex flex-col sm:flex-row bg-[#FFF5F6] rounded-lg pl-2 py-1 justify-between sm:gap-10 shadow-lg w-full sm:w-[720px] overflow-x-auto">
+                <div className="flex flex-wrap gap-4 sm:gap-5">
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 rounded-full bg-[#EE6295]"></div>
-                    <span className="text-sm font-bold text-[#9E033B]"> Audience Reached</span>
+                    <span className="text-sm font-bold text-[#9E033B]">Audience Reached</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 rounded-full bg-[#EE6295]"></div>
-                    <span className="text-sm font-bold text-[#9E033B]"> Audience Engaged</span>
+                    <span className="text-sm font-bold text-[#9E033B]">Audience Engaged</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 rounded-full bg-[#EE6295]"></div>
-                    <span className="text-sm font-bold text-[#9E033B]"> Conversion Rate</span>
+                    <span className="text-sm font-bold text-[#9E033B]">Conversion Rate</span>
                   </div>
                 </div>
-                <div className="flex items-center relative left-8">
-                  <button className="px-6 py-2 rounded-xl bg-[#e91e63] text-white font-semibold shadow hover:bg-[#c2185b] transition-all">Edit</button>
+
+                <div className="flex items-center lg:mt-2 mt-0 sm:relative">
+                  <button className="px-6 py-2 rounded-xl bg-[#e91e63] text-white font-semibold shadow hover:bg-[#c2185b] transition-all w-full sm:w-auto">
+                    Edit
+                  </button>
                 </div>
               </div>
-              <div className="flex bg-[#FFF5F6] gap-2 rounded-lg p-2 w-120 shadow-lg">
-                <div className="flex w-40 justify-center">
-                  <span className="text-md text-gray-900 text-center">{statistics.reached.toLocaleString()}</span>
+
+              {/* Value Section */}
+              <div className="flex flex-col sm:flex-row bg-[#FFF5F6] rounded-lg p-2 shadow-lg w-full sm:w-[480px]">
+                <div className="flex justify-center sm:w-40 py-2 w-full">
+                  <span className="text-md text-gray-900 text-center">
+                    {statistics.reached.toLocaleString()}
+                  </span>
                 </div>
-                <div className="flex w-40 justify-center">
-                  <span className="text-md text-gray-900">{statistics.engaged.toLocaleString()}</span>
+                <div className="flex justify-center sm:w-40 py-2 w-full">
+                  <span className="text-md text-gray-900 text-center">
+                    {statistics.engaged.toLocaleString()}
+                  </span>
                 </div>
-                <div className="flex w-40 justify-center">
-                  <span className="text-md text-[#3A974C]">{statistics.conversion}%+</span>
+                <div className="flex justify-center sm:w-40 py-2 w-full">
+                  <span className="text-md text-[#3A974C] text-center">
+                    {statistics.conversion}%+
+                  </span>
                 </div>
               </div>
             </div>
           </div>
+
+
 
           <div className="flex flex-wrap gap-10 justify-between items-end ">
             {/* Top Selling Packages */}
@@ -275,7 +349,7 @@ export default function Analytics({
               </div>
 
               {/* Button */}
-              <button onClick={()=> nav('/')} className="mt-6 w-full cursor-pointer flex items-center justify-center gap-2 text-sm font-semibold border border-[#e91e63] text-[#e91e63] py-2 rounded-lg hover:bg-[#ffe6ec] transition-all">
+              <button onClick={() => nav('/')} className="mt-6 w-full cursor-pointer flex items-center justify-center gap-2 text-sm font-semibold border border-[#e91e63] text-[#e91e63] py-2 rounded-lg hover:bg-[#ffe6ec] transition-all">
                 View all activity
                 <MoveRight className="h-4 w-4" />
               </button>
@@ -283,9 +357,9 @@ export default function Analytics({
           </div>
 
           {/* Right Column */}
-          <div className="flex justify-between items-center w-full gap-2">
+          <div className="flex flex-col lg:flex-row justify-between items-start w-full gap-4">
             {/* Recent Orders */}
-            <div className="bg-[#FFF5F6] p-6 rounded-xl shadow w-160">
+            <div className="bg-[#FFF5F6] p-6 rounded-xl shadow w-full lg:w-[65%]">
               {/* Header */}
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-lg font-bold text-[#f50057]">Recent Orders</h3>
@@ -294,7 +368,7 @@ export default function Analytics({
 
               {/* Table */}
               <div className="overflow-x-auto">
-                <table className="w-full text-sm text-left">
+                <table className="w-full text-sm text-left min-w-[600px]">
                   <thead>
                     <tr className="text-[#A80A43] font-medium">
                       <th className="pb-3">Tracking no <span className="text-[#EE6295] text-xs">▼</span></th>
@@ -333,12 +407,12 @@ export default function Analytics({
             </div>
 
             {/* Income by Packages */}
-            <div className="w-80 pr-2">
-              <div className="bg-white w-full flex flex-col col-span-1 md:col-span-1">
+            <div className="w-full lg:w-[35%]">
+              <div className="bg-white w-full flex flex-col">
                 <div className="text-lg font-bold text-pink-700 mb-2">Income by Packages</div>
-                <div className="flex-1 rounded-2xl p-6 w-full bg-pink-50">
+                <div className="rounded-2xl p-6 w-full bg-pink-50">
                   <ResponsiveContainer key={Date.now()} width="100%" height={260}>
-                    <PieChart  >
+                    <PieChart>
                       <Pie
                         data={mockPackageData}
                         cx="50%"
@@ -353,7 +427,7 @@ export default function Analytics({
                           return (
                             <text
                               x={x}
-                              y={y-10}
+                              y={y - 10}
                               fill="#fff"
                               textAnchor="middle"
                               dominantBaseline="central"
@@ -383,7 +457,146 @@ export default function Analytics({
               </div>
             </div>
           </div>
+
         </div>
+
+
+        <div className="flex flex-wrap w-full gap-6 mt-6">
+          {/* Weekly Activity Chart */}
+          <div className="flex flex-col lg:p-2 w-full lg:w-[60%] min-w-[200px]">
+            <div className="text-lg font-bold text-pink-700 mb-2">Weekly Activity</div>
+            <div className="flex-1 bg-pink-50 lg:p-6 p-2 rounded-2xl">
+              <div className="flex justify-end items-center gap-2 mb-4">
+                <div className="w-3 h-3 bg-[#D42D69] rounded-full"></div>
+                <span className="text-xs text-pink-600">Orders</span>
+                <div className="w-3 h-3 bg-[#EE6295] rounded-full"></div>
+                <span className="text-xs text-pink-600">Packages</span>
+              </div>
+              <ResponsiveContainer width="100%" height={250}>
+                <BarChart
+                  data={weeklyData}
+                  barCategoryGap={30}
+                  margin={{ top: 20, right: 20, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid strokeDasharray="0" stroke="#FAD1DF" />
+                  <XAxis
+                    dataKey="day"
+                    tick={{ fill: '#EE6295', fontWeight: 300 }}
+                    axisLine={false}
+                    tickLine={false}
+                  />
+                  <YAxis
+                    tick={{ fill: '#EE6295', fontWeight: 300 }}
+                    axisLine={false}
+                    tickLine={false}
+                  />
+                  <Tooltip contentStyle={{ borderRadius: 12, borderColor: '#F2C4C7' }} />
+                  <Bar dataKey="orders" fill="#D42D69" radius={[8, 8, 8, 8]} barSize={10} />
+                  <Bar dataKey="packages" fill="#EE6295" radius={[8, 8, 8, 8]} barSize={10} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          {/* Recent Income */}
+          <div className="flex flex-col lg:p-2 w-full lg:w-[33%] min-w-[300px]">
+            <div className="text-lg font-bold text-pink-700 mb-2">Recent Income</div>
+            <div className="space-y-6 rounded-2xl shadow-lg lg:p-6 p-2 bg-white lg:min-h-[250px]">
+              {recentIncome.map((item, idx) => (
+                <div className="flex items-center justify-between" key={idx}>
+                  <div>
+                    <p className="font-semibold text-black">{item.name}</p>
+                    <p className="text-xs text-pink-300">{item.date}</p>
+                  </div>
+                  <p className="font-semibold text-emerald-500">{item.amount}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+
+
+        <div className="bg-white rounded-2xl flex flex-col lg:p-4 p-2 w-full lg:w-[68%] lg:min-w-[300px]">
+          <div className="text-lg font-bold text-pink-700 mb-2">Monthly Income</div>
+          <div className="flex-1">
+            <ResponsiveContainer width="100%" height={250}>
+              <LineChart data={monthlyData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                <defs>
+                  <linearGradient id="colorIncome" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#E5024E" stopOpacity={0.3} />
+                    <stop offset="100%" stopColor="#E5024E" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#F2C4C7" />
+                <XAxis
+                  dataKey="month"
+                  tick={{ fill: '#E5024E', fontWeight: 400 }}
+                  axisLine={false}
+                  tickLine={false}
+                />
+                <YAxis
+                  tick={{ fill: '#E5024E', fontWeight: 400 }}
+                  axisLine={false}
+                  tickLine={false}
+                />
+                <Tooltip contentStyle={{ borderRadius: 12, borderColor: '#F2C4C7' }} />
+                <Line
+                  type="monotone"
+                  dataKey="Income"
+                  stroke="#E5024E"
+                  strokeWidth={3}
+                  dot={{ r: 4, fill: '#E5024E' }}
+                  activeDot={{ r: 5 }}
+                  fillOpacity={1}
+                  fill="url(#colorIncome)"
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+
+
+        <div className="mt-8 lg:rounded-2xl p-2 w-full">
+          <div className="text-lg font-bold text-pink-700 mb-2">Payment History</div>
+          <div className="overflow-x-auto">
+            <table className="min-w-[800px] w-full lg:rounded-2xl overflow-hidden">
+              <thead>
+                <tr className="bg-[#FFF5F6] border-b-2 border-pink-100">
+                  <th className="text-left py-3 px-4 text-[#ED004F] font-bold">Description</th>
+                  <th className="text-left py-3 px-4 text-[#ED004F] font-bold">Order ID</th>
+                  <th className="text-left py-3 px-4 text-[#ED004F] font-bold">Type</th>
+                  <th className="text-left py-3 px-4 text-[#ED004F] font-bold">Date</th>
+                  <th className="text-left py-3 px-4 text-[#ED004F] font-bold">Amount</th>
+                  <th className="text-left py-3 px-4 text-[#ED004F] font-bold">Receipt</th>
+                </tr>
+              </thead>
+              <tbody>
+                {paymentHistory.map((row, idx) => (
+                  <tr className="bg-[#FFF5F6]" key={idx}>
+                    <td className="py-3 px-4 font-medium text-black">{row.description}</td>
+                    <td className="py-3 px-4 text-gray-500">{row.orderId}</td>
+                    <td className="py-3 px-4 text-gray-500">{row.type}</td>
+                    <td className="py-3 px-4 text-gray-500">{row.date}</td>
+                    <td className="py-3 px-4 text-emerald-500 font-semibold">{row.amount}</td>
+                    <td className="py-3 px-4">
+                      {row.receipt && (
+                        <button className="flex items-center gap-2 px-4 py-1 border border-[#ED004F] text-[#ED004F] rounded-full hover:bg-pink-50 transition font-semibold">
+                          <Download className="h-4 w-4" />
+                          Download
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+
       </div>
     </div>
   )

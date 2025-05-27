@@ -364,131 +364,130 @@ export default function ManageOrders() {
     }
   }
 
-  return (
-    <div className="bg-white w-full min-h-screen p-6">
-      {/* <Header title="Manage Orders" /> */}
-      <div className="max-w-7xl mx-auto relative">
-        <div className="bg-white border-l border-[#E6EFF5] pt-15">
-          <table className="w-full">
-            <thead>
-              <tr className="text-left text-sm">
-                <th className="p-4 font-medium text-gray-500">
+return (
+  <div className="bg-white w-full min-h-screen p-4 sm:p-6">
+    {/* <Header title="Manage Orders" /> */}
+    <div className="max-w-7xl mx-auto relative">
+      <div className="bg-white border-l border-[#E6EFF5] pt-10 overflow-x-auto">
+        <table className="w-full min-w-[768px]">
+          <thead>
+            <tr className="text-left text-sm">
+              <th className="p-2 sm:p-4 font-medium text-gray-500">
+                <input
+                  type="checkbox"
+                  checked={selectAll}
+                  onChange={handleSelectAll}
+                  className="rounded border-gray-300 accent-[#E5024E]"
+                />
+              </th>
+              {["Invoice ID", "Name", "Description", "Date", "Status", ""].map((heading, idx) => (
+                <th key={idx} className="p-2 sm:p-4 font-medium text-[#EE6295] whitespace-nowrap">
+                  {heading && (
+                    <>
+                      {heading} <span className="text-[#EE6295] text-xs">▼</span>
+                    </>
+                  )}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {orders.map((order) => (
+              <tr
+                key={order.id}
+                className="hover:shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)] duration-200 rounded-lg"
+                onClick={() => handleOrderClick(order)}
+              >
+                <td className="p-2 sm:p-4">
                   <input
                     type="checkbox"
-                    checked={selectAll}
-                    onChange={handleSelectAll}
-                    className="rounded border-gray-300 accent-[#E5024E]"
+                    checked={order.selected}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleSelect(order.id);
+                    }}
+                    className="rounded border-gray-300 accent-[#E5024E] cursor-pointer"
                   />
-                </th>
-                <th className="p-4 font-medium text-[#EE6295]">
-                  Invoice ID <span className="text-[#EE6295] text-xs">▼</span>
-                </th>
-                <th className="p-4 font-medium text-[#EE6295]">
-                  Name <span className="text-[#EE6295] text-xs">▼</span>
-                </th>
-                <th className="p-4 font-medium text-[#EE6295]">
-                  Description <span className="text-[#EE6295] text-xs">▼</span>
-                </th>
-                <th className="p-4 font-medium text-[#EE6295]">
-                  Date <span className="text-[#EE6295] text-xs">▼</span>
-                </th>
-                <th className="p-4 font-medium text-[#EE6295]">
-                  Status <span className="text-[#EE6295] text-xs">▼</span>
-                </th>
-                <th className="p-4 font-medium text-[#EE6295]">
-                  {/* <Trash2 className="h-5 w-5 text-[#EE6295]" /> */}
-                  <img src={icons.DeleteIcon} alt="" className="h-5 w-5" />
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order) => (
-                <tr
-                  key={order.id}
-                  className="hover:shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)] duration-200 rounded-lg"
-                  onClick={() => handleOrderClick(order)}
-                >
-                  <td className="p-4">
-                    <input
-                      type="checkbox"
-                      checked={order.selected}
+                </td>
+
+                {/* Invoice ID */}
+                <td className="p-2 sm:p-4 text-sm font-medium whitespace-nowrap">
+                  {order.id}
+                  {order.isNew && (
+                    <span className="ml-2 px-2 py-1 text-xs bg-green-100 text-green-600 rounded-full">New</span>
+                  )}
+                </td>
+
+                {/* Name */}
+                <td className="p-2 sm:p-4 whitespace-nowrap">
+                  <div className="flex items-center gap-2">
+                    <div className="h-8 w-8 rounded-full overflow-hidden bg-gray-200" />
+                    <span className="text-sm font-medium text-pink-600">{order.name}</span>
+                  </div>
+                </td>
+
+                {/* Description */}
+                <td className="p-2 sm:p-4">
+                  <div className="flex items-center gap-2">
+                    <img src={icons.Message} alt="" className="w-3 h-3" />
+                    <span className="text-sm text-gray-600">{order.description}</span>
+                  </div>
+                </td>
+
+                {/* Date */}
+                <td className="p-2 sm:p-4 whitespace-nowrap">
+                  <div className="flex items-center gap-2">
+                    <img src={icons.Calender} alt="" className="w-3 h-3" />
+                    <span className="text-sm text-gray-600">{order.date}</span>
+                  </div>
+                </td>
+
+                {/* Status */}
+                <StatusDropdown order={order} onChange={handleStatusChange} />
+
+                {/* Actions */}
+                <td className="p-2 sm:p-4">
+                  <div className="flex items-center gap-4">
+                    <button
                       onClick={(e) => {
-                        // e.preventDefault();
-                        e.stopPropagation();
-                        toggleSelect(order.id);
-                      }}
-                      className="rounded border-gray-300 accent-[#E5024E] cursor-pointer"
-                    />
-                  </td>
-                  <td className="p-4 text-sm font-medium">
-                    {order.id}
-                    {order.isNew && (
-                      <span className="ml-2 px-2 py-1 text-xs bg-green-100 text-green-600 rounded-full">New</span>
-                    )}
-                  </td>
-                  <td className="p-4">
-                    <div className="flex items-center gap-2">
-                      <div className="h-8 w-8 rounded-full overflow-hidden bg-gray-200">
-                      </div>
-                      <span className="text-sm font-medium text-pink-600">{order.name}</span>
-                    </div>
-                  </td>
-                  <td className="p-4">
-                    <div className="flex items-center gap-2">
-                      <div className="p-1 rounded">
-                        <img src={icons.Message} alt="" className="w-3 h-3" />
-                      </div>
-                      <span className="text-sm text-gray-600">{order.description}</span>
-                    </div>
-                  </td>
-                  <td className="p-4">
-                    <div className="flex items-center gap-2">
-                      <div className="p-1 rounded">
-                        <img src={icons.Calender} alt="" className="w-3 h-3" />
-                      </div>
-                      <span className="text-sm text-gray-600">{order.date}</span>
-                    </div>
-                  </td>
-                  <StatusDropdown order={order} onChange={handleStatusChange} />
-                  <td className="p-4">
-                    <div className="flex items-center gap-4">
-                      <button onClick={(e) => {
                         e.stopPropagation();
                         toggleStar(order.id);
-                      }} className="focus:outline-none cursor-pointer">
-                        <Star
-                          className={`h-5 w-5 ${order.starred ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
-                        />
-                      </button>
-                      <div className="relative" >
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleMoreClick(order.id);
-                          }}
-                          className="focus:outline-none cursor-pointer"
-                        >
-                          <MoreHorizontal className="h-5 w-5 text-[#E5024E] z-5" />
-                        </button>
-                        <AnimatePresence>
+                      }}
+                      className="focus:outline-none cursor-pointer"
+                    >
+                      <Star
+                        className={`h-5 w-5 ${order.starred ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
+                      />
+                    </button>
 
+                    {/* Dropdown */}
+                    <div className="relative">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleMoreClick(order.id);
+                        }}
+                        className="focus:outline-none cursor-pointer"
+                      >
+                        <MoreHorizontal className="h-5 w-5 text-[#E5024E]" />
+                      </button>
+
+                      <AnimatePresence>
                         {openDropdownId === order.id && (
                           <motion.div
-                        ref={menuRef}
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.5 }}
-                        transition={{ duration: 0.5 }}
-                        className="absolute -right-6 top-4 mt-2 w-36 bg-white p-2 rounded-lg flex flex-col gap-1 shadow-lg border border-gray-100 z-10"
-                      >
-
-                        
+                            ref={menuRef}
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.5 }}
+                            transition={{ duration: 0.5 }}
+                            className="absolute -right-6 top-4 mt-2 w-36 bg-white p-2 rounded-lg flex flex-col gap-1 shadow-lg border border-gray-100 z-10"
+                          >
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
                                 handleMarkAsRead(order.id);
                               }}
-                              className="w-full hover:bg-[#f0f0f0] hover:text-[#DB024D] bg-gray-50 px-2 py-2 rounded-lg text-left text-xs text-gray-700 flex items-center gap-2 z-10"
+                              className="w-full hover:bg-[#f0f0f0] hover:text-[#DB024D] bg-gray-50 px-2 py-2 rounded-lg text-left text-xs text-gray-700 flex items-center gap-2"
                             >
                               <img src={icons.MarkAsRead} alt="" className="h-3 w-3" />
                               Mark as Read
@@ -498,40 +497,42 @@ export default function ManageOrders() {
                                 e.stopPropagation();
                                 handleDelete(order.id);
                               }}
-                              className="w-full px-2 bg-[#ee62953b] py-2 rounded-md text-left text-xs text-red-600 hover:bg-gray-50 flex items-center gap-2 z-10"
+                              className="w-full px-2 bg-[#ee62953b] py-2 rounded-md text-left text-xs text-red-600 hover:bg-gray-50 flex items-center gap-2"
                             >
                               <img src={icons.DeleteIcon} alt="" className="h-3 w-3" />
                               Delete
                             </button>
-                              </motion.div>
-                       
+                          </motion.div>
                         )}
-                        </AnimatePresence>
-                      </div>
+                      </AnimatePresence>
                     </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <CancelOrderModal
-            isOpen={cancelModalOpen}
-            onClose={() => {
-              setCancelModalOpen(false);
-              setSelectedOrderId(null);
-            }}
-            onSubmit={handleCancelSubmit}
-            orderId={selectedOrderId}
-          />
-          <NewOrderPopup
-            isOpen={showNewOrderPopup}
-            onClose={() => setShowNewOrderPopup(false)}
-            onAccept={handleAcceptOrder}
-            onReject={handleRejectOrder}
-            orderData={newOrder}
-          />
-        </div>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {/* Modals */}
+        <CancelOrderModal
+          isOpen={cancelModalOpen}
+          onClose={() => {
+            setCancelModalOpen(false);
+            setSelectedOrderId(null);
+          }}
+          onSubmit={handleCancelSubmit}
+          orderId={selectedOrderId}
+        />
+        <NewOrderPopup
+          isOpen={showNewOrderPopup}
+          onClose={() => setShowNewOrderPopup(false)}
+          onAccept={handleAcceptOrder}
+          onReject={handleRejectOrder}
+          orderData={newOrder}
+        />
       </div>
     </div>
-  )
+  </div>
+);
+
 } 
