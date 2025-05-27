@@ -28,7 +28,7 @@ import HomeIcon from "../assets/homeIcon.svg";
 import Message from '../assets/Message.svg';
 import Calender from "../assets/Calendar.svg";
 import MarkAsRead from "../assets/markasread.svg";
-import DeleteIcon from "../assets/delete.svg";
+import DeleteIcon from "../assets/Delete.svg";
 import MessageBackground from "../assets/Frame 29.png";
 import LazeezLogo from "../assets/LazeezIcon.svg";
 import chefIcon from '../assets/chefIcon.svg'
