@@ -173,8 +173,8 @@ export default function TrackPaymentsPage({
 
                     return (
                       <text
-                        x={x}
-                        y={y - 15}
+                        x={x - 4}
+                        y={y - 12}
                         fill="#fff"
                         textAnchor="middle"
                         dominantBaseline="central"

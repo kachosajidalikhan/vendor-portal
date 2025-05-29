@@ -239,13 +239,13 @@ export default function Chats() {
                   <div className="flex flex-col">
                     <span className="text-sm font-bold text-[#E5024E]">{order.name}</span>
                     <span className="text-xs sm:text-sm text-gray-600">
-                          {order.description.split(' ').slice(0, 2).join(' ')}...
-                        </span>
+                      {order.description.split(' ').slice(0, 2).join(' ')}...
+                    </span>
                   </div>
                 </div>
                 <div className="flex flex-row gap-4 items-end">
                   {order.isNew && (
-                  <span className="bg-pink-100 text-pink-800 text-xs px-3 py-1 rounded-full">New</span>
+                    <span className="bg-pink-100 text-pink-800 text-xs px-3 py-1 rounded-full">New</span>
                   )}
                   <button
                     onClick={(e) => {
@@ -349,7 +349,7 @@ export default function Chats() {
                         </span>
                       )}
                     </td>
-                    <td className="p-2 sm:p-4" onClick={(e) => e.stopPropagation()}>
+                    <td className="p-2 sm:p-4 relative" onClick={(e) => e.stopPropagation()}>
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -358,7 +358,35 @@ export default function Chats() {
                       >
                         <MoreHorizontal className="h-5 w-5 text-[#E5024E]" />
                       </button>
+                      <AnimatePresence>
+                        {openDropdownId === order.id && (
+                          <motion.div
+                            ref={menuRef}
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.5 }}
+                            transition={{ duration: 0.3 }}
+                            className="absolute right-0 mt-2 w-36 bg-white p-2 rounded-lg shadow-lg border border-gray-100 z-10"
+                          >
+                            <button
+                              onClick={() => handleMarkAsRead(order.id)}
+                              className="w-full hover:bg-[#f0f0f0] hover:text-[#DB024D] bg-gray-50 px-2 py-2 rounded-lg text-left text-xs text-gray-700 flex items-center gap-2"
+                            >
+                              <img src={icons.MarkAsRead} alt="" className="h-3 w-3" />
+                              Mark as Read
+                            </button>
+                            <button
+                              onClick={() => handleDelete(order.id)}
+                              className="w-full px-2 bg-[#ee62953b] py-2 rounded-md text-left text-xs text-red-600 hover:bg-gray-50 flex items-center gap-2"
+                            >
+                              <img src={icons.DeleteIcon} alt="" className="h-3 w-3" />
+                              Delete
+                            </button>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </td>
+
                   </tr>
                 ))}
               </tbody>

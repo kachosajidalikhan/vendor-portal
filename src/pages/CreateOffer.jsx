@@ -28,7 +28,7 @@ function CreateOffer() {
     { id: 6, image: image, audience: "Moty log", foodCategory: "desi food", title: "Birthday special 2", subTitles: "We have released the payment for your recent order.", isNew: false },
   ]
 
-   const handleMoreClick = (id) => {
+  const handleMoreClick = (id) => {
     setOpenDropdownId(openDropdownId === id ? null : id)
   }
 
@@ -79,20 +79,20 @@ function CreateOffer() {
 
   const menuRef = useRef(null);
   useEffect(() => {
-      const handleClickOutside = (event) => {
-        // Check if the click is on the MoreHorizontal button
-        const isMoreButton = event.target.closest('button');
-        if (isMoreButton) return;
-  
-        if (menuRef.current && !menuRef.current.contains(event.target)) {
-          setOpenDropdownId(null);
-        }
-      };
-  
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
-  
+    const handleClickOutside = (event) => {
+      // Check if the click is on the MoreHorizontal button
+      const isMoreButton = event.target.closest('button');
+      if (isMoreButton) return;
+
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setOpenDropdownId(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
 
 
   const handleDetail = (notification) => () => {
@@ -113,13 +113,16 @@ function CreateOffer() {
               </svg>
               <span className="text-[#3A974C] font-semibold text-sm">Save</span>
             </div>
-           )}
+          )}
           {notifications.map((notification) => (
             <div onClick={handleDetail(notification)} key={notification.id} className="flex items-center justify-between py-2 px-4 shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)] rounded-md">
               <div className="flex items-center gap-4">
-                <div className="w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center">
-                  <span className="text-white text-xs"></span>
+                <div className="w-7 h-7 rounded-full bg-pink-500 flex items-center justify-center">
+                  <span className="text-white text-xs">
+                    {notification.title?.charAt(0).toUpperCase()}
+                  </span>
                 </div>
+
                 <div className="flex flex-row flex-1">
                   <h3 className="font-medium text-[#9E033B]">{notification.title}</h3>
                 </div>
@@ -136,43 +139,43 @@ function CreateOffer() {
                 </button>
                 <AnimatePresence>
 
-                {openDropdownId === notification.id && (
-                  <motion.div
-                        ref={menuRef}
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.5 }}
-                        transition={{ duration: 0.5 }}
-                        // className="absolute -right-10 top-2 mt-2 w-36 bg-white p-2 rounded-lg flex flex-col gap-1 shadow-lg border border-gray-100 z-10"
-                      >
+                  {openDropdownId === notification.id && (
+                    <motion.div
+                      ref={menuRef}
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.5 }}
+                      transition={{ duration: 0.5 }}
+                    // className="absolute -right-10 top-2 mt-2 w-36 bg-white p-2 rounded-lg flex flex-col gap-1 shadow-lg border border-gray-100 z-10"
+                    >
 
-                  <div
-                    className="absolute -right-4 mt-2 w-36 bg-white p-2 rounded-lg flex flex-col gap-1 shadow-lg border border-gray-100 z-10"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleMarkAsRead(notification.id);
-                      }}
-                      className="w-full hover:bg-[#f0f0f0] hover:text-[#DB024D] bg-gray-50 px-2 py-2 rounded-lg text-left text-xs text-gray-700 flex items-center gap-2 z-10"
+                      <div
+                        className="absolute -right-4 mt-2 w-36 bg-white p-2 rounded-lg flex flex-col gap-1 shadow-lg border border-gray-100 z-10"
+                        onClick={(e) => e.stopPropagation()}
                       >
-                      <img src={icons.MarkAsRead} alt="" className="h-3 w-3" />
-                      Mark as Read
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDelete(notification.id);
-                      }}
-                      className="w-full px-2 bg-[#ee62953b] py-2 rounded-md text-left text-xs text-red-600 hover:bg-gray-50 flex items-center gap-2 z-10"
-                      >
-                      <img src={icons.DeleteIcon} alt="" className="h-3 w-3" />
-                      Delete
-                    </button>
-                  </div>
-                        </motion.div>
-                )}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleMarkAsRead(notification.id);
+                          }}
+                          className="w-full hover:bg-[#f0f0f0] hover:text-[#DB024D] bg-gray-50 px-2 py-2 rounded-lg text-left text-xs text-gray-700 flex items-center gap-2 z-10"
+                        >
+                          <img src={icons.MarkAsRead} alt="" className="h-3 w-3" />
+                          Mark as Read
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDelete(notification.id);
+                          }}
+                          className="w-full px-2 bg-[#ee62953b] py-2 rounded-md text-left text-xs text-red-600 hover:bg-gray-50 flex items-center gap-2 z-10"
+                        >
+                          <img src={icons.DeleteIcon} alt="" className="h-3 w-3" />
+                          Delete
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
                 </AnimatePresence>
               </div>
             </div>
@@ -209,7 +212,7 @@ function CreateOffer() {
             </p>
           </div>
         </div>
-       )}
+      )}
     </div>
   )
 }

@@ -69,17 +69,20 @@ function Notifications() {
               className="flex items-center justify-between py-2 px-2 shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)] rounded-md"
             >
               <div className="flex w-fit items-center gap-3">
-                <div className="w-6 h-6 rounded-full bg-pink-500 flex items-center justify-center">
-                  <span className="text-white text-xs"></span>
+                <div className="w-7 h-7 rounded-full bg-pink-500 flex items-center justify-center">
+                  <span className="text-white text-xs">
+                    {notification.title?.charAt(0).toUpperCase()}
+                  </span>
                 </div>
+
                 <div>
 
-                <div className="flex flex-row flex-1">
-                  <h3 className="Poppins-bold text-sm text-[#9E033B]">{notification.title.split(' ').slice(0, 2).join(' ')}</h3>
-                </div>
-                <p className="text-[#bf064499] text-sm w-fit truncate">
-                  {notification.description.split(' ').slice(0, 2).join(' ')}...
-                </p>
+                  <div className="flex flex-row flex-1">
+                    <h3 className="Poppins-bold text-sm text-[#9E033B]">{notification.title.split(' ').slice(0, 2).join(' ')}</h3>
+                  </div>
+                  <p className="text-[#bf064499] text-sm w-fit truncate">
+                    {notification.description.split(' ').slice(0, 2).join(' ')}...
+                  </p>
                 </div>
               </div>
 
@@ -135,7 +138,7 @@ function Notifications() {
 
 
 
-{/* desktop version */}
+        {/* desktop version */}
         <div className="hidden md:block space-y-3 pt-12 md:px-30 ">
           {notifications.map((notification) => (
             <div
@@ -144,12 +147,15 @@ function Notifications() {
             >
               <div className="flex md:w-[80%] items-center gap-4">
                 <div className="w-7 h-7 rounded-full bg-pink-500 flex items-center justify-center">
-                  <span className="text-white text-xs"></span>
+                  <span className="text-white text-xs">
+                    {notification.title?.charAt(0).toUpperCase()}
+                  </span>
                 </div>
+
                 {/* <div> */}
 
                 <div className="flex flex-row flex-1">
-                  <h3 className="Poppins-bold text-sm md:text-lg text-[#9E033B]">{notification.title}</h3>
+                  <h3 className="Poppins-bold text-sm md:text-[14px] text-[#9E033B]">{notification.title}</h3>
                 </div>
                 <p className="text-[#bf064499] text-sm w-[30%] truncate">
                   {notification.description.split(' ').slice(0, 4).join(' ')}...

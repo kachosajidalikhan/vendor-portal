@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Pencil, Search } from 'lucide-react';
+import { Pencil, Search, Eye, EyeOff } from 'lucide-react';
+
 import icons from "../constants";
 import Header from "../components/Header";
 
@@ -86,6 +87,12 @@ export default function Settings() {
     }
   };
 
+    const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="w-full min-h-screen bg-white p-6">
       {/* <Header title="Settings" /> */}
@@ -99,7 +106,7 @@ export default function Settings() {
           <div className="flex flex-col md:flex-row gap-8 mb-8">
             <div className="flex-shrink-0 mx-auto md:mx-0">
               <div className="relative">
-                <div className="w-24 h-24 md:w-24 md:h-24 w-20 h-20 rounded-full bg-sky-100 overflow-hidden relative">
+                <div className=" md:w-24 md:h-24 w-20 h-20 rounded-full bg-sky-100 overflow-hidden relative">
                   {formData.profileImage ? (
                     <img
                       src={formData.profileImage}
@@ -167,15 +174,25 @@ export default function Settings() {
                 />
               </div>
 
-              <div className="space-y-0">
+              <div className="space-y-0 relative">
                 <label htmlFor="password" className="text-[#ED004F] text-sm pb-1 block">Password</label>
                 <input
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="rounded-xl w-full lg:w-[318px] max-w-sm h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="rounded-xl w-full lg:w-[318px] max-w-sm h-[50px] text-sm border border-[#9E033B] px-3 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
                 />
+
+                {/* Eye Icon */}
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute lg:-right-12 right-6 top-[38px] text-[#ED004F]"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
               </div>
 
               <div className="space-y-0">

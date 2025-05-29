@@ -133,7 +133,7 @@ function CreatePackage() {
       {/* Container */}
       <div className="max-w-5xl mx-auto p-4">
         {/* Package List */}
-        <div className="space-y-3 pt-12 px-4 sm:px-6 md:px-8 border border-[#E6EFF5] rounded-lg">
+        <div className="space-y-3 pt-2 px-4 sm:px-6 md:px-8 rounded-lg">
           {packages.length === 0 ? (
             <p className="text-center text-gray-400 py-8">No packages available.</p>
           ) : (
@@ -159,7 +159,7 @@ function CreatePackage() {
                       e.stopPropagation();
                       toggleMenu(packageItem.id);
                     }}
-                    className="text-[#E5024E] hover:text-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-300 rounded"
+                    className="text-[#E5024E] hover:text-pink-600 rounded"
                     aria-haspopup="true"
                     aria-expanded={activeMenu === packageItem.id}
                     aria-label="Open package menu"

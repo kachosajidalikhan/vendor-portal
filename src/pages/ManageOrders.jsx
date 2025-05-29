@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react"
-import { Search, Bell, Star, MoreHorizontal, Trash2, CheckCircle } from "lucide-react"
+import { Search,User, Bell, Star, MoreHorizontal, Trash2, CheckCircle } from "lucide-react"
+
 import icons from "../constants/index"
 import Header from "../components/Header"
 import StatusDropdown from "../components/customDropDown"
@@ -19,7 +20,7 @@ export default function ManageOrders() {
       description: "Ordered Barat pack...",
       date: "12 Dec, 2023",
       status: "Complete",
-      starred: true,
+      starred: false,
       selected: false,
       packageName: "Grand Walima",
       packageType: "Buffet",
@@ -41,7 +42,7 @@ export default function ManageOrders() {
       description: "Ordered Barat pack...",
       date: "12 Dec, 2023",
       status: "Complete",
-      starred: true,
+      starred: false,
       selected: false,
       packageName: "Grand Walima",
       packageType: "Buffet",
@@ -63,7 +64,7 @@ export default function ManageOrders() {
       description: "Ordered Barat pack...",
       date: "12 Dec, 2023",
       status: "Complete",
-      starred: true,
+      starred: false,
       selected: false,
       packageName: "Grand Walima",
       packageType: "Buffet",
@@ -84,7 +85,7 @@ export default function ManageOrders() {
       avatar: "/placeholder.svg?height=32&width=32",
       description: "Ordered Barat pack...",
       date: "08 Dec, 2023",
-      starred: true,
+      starred: false,
       selected: false,
       packageName: "Grand Walima",
       packageType: "Buffet",
@@ -105,7 +106,7 @@ export default function ManageOrders() {
       avatar: "/placeholder.svg?height=32&width=32",
       description: "Ordered Barat pack...",
       date: "10 Dec, 2022",
-      starred: true,
+      starred: false,
       selected: false,
       packageName: "Grand Walima",
       packageType: "Buffet",
@@ -126,7 +127,7 @@ export default function ManageOrders() {
       avatar: "/placeholder.svg?height=32&width=32",
       description: "Ordered Barat pack...",
       date: "10 Dec, 2022",
-      starred: true,
+      starred: false,
       selected: false,
       packageName: "Grand Walima",
       packageType: "Buffet",
@@ -148,7 +149,7 @@ export default function ManageOrders() {
       description: "Ordered Barat pack...",
       date: "10 Dec, 2022",
       status: "Completed",
-      starred: true,
+      starred: false,
       selected: false,
       packageName: "Grand Walima",
       packageType: "Buffet",
@@ -163,50 +164,7 @@ export default function ManageOrders() {
       location: 'Plot 232, JTH, Karachi.',
       isNew: false
     },
-    {
-      id: "#872343",
-      name: "Ali",
-      avatar: "/placeholder.svg?height=32&width=32",
-      description: "Ordered Barat pack...",
-      date: "10 Dec, 2022",
-      status: "Cancelled",
-      starred: true,
-      selected: false,
-      packageName: "Grand Walima",
-      packageType: "Buffet",
-      foodItem: "Biryani, Korma, Naan",
-      totalServing: "500",
-      addOns: "100ml Signtr. Drink, 1 unit per box",
-      price: "500000",
-      preparationTime: "2",
-      deliveryTime: "1",
-      paymentMethod: "COD",
-      totalIncome: 20000,
-      location: 'Plot 232, JTH, Karachi.',
-      isNew: false
-    },
-    {
-      id: "#872341",
-      name: "Ali",
-      avatar: "/placeholder.svg?height=32&width=32",
-      description: "Ordered Barat pack...",
-      date: "10 Dec, 2022",
-      status: "Pending",
-      starred: true,
-      selected: false,
-      packageName: "Grand Walima",
-      packageType: "Buffet",
-      foodItem: "Biryani, Korma, Naan",
-      totalServing: "500",
-      addOns: "100ml Signtr. Drink, 1 unit per box",
-      price: "500000",
-      preparationTime: "2",
-      deliveryTime: "1",
-      paymentMethod: "COD",
-      totalIncome: 20000,
-      location: 'Plot 232, JTH, Karachi.',
-      isNew: false
-    },
+    
   ])
   const [openDropdownId, setOpenDropdownId] = useState(null)
   const [selectAll, setSelectAll] = useState(false)
@@ -421,7 +379,10 @@ return (
                 {/* Name */}
                 <td className="p-2 sm:p-4 whitespace-nowrap">
                   <div className="flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-full overflow-hidden bg-gray-200" />
+                    <div className="h-8 w-8 flex justify-center items-center rounded-full overflow-hidden bg-gray-200">
+                      <User className="h-6 w-6 rounded-full overflow-hidden " />
+                    </div>
+                    
                     <span className="text-sm font-medium text-pink-600">{order.name}</span>
                   </div>
                 </td>

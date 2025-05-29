@@ -93,28 +93,26 @@ export default function MessagePage() {
                 </div>
 
                 {/* Message Input */}
-                <div className="lg:p-4 py-2 lg:ml-8 px-4 lg:px-0 fixed bottom-0 w-full bg-white z-10">
-                    <div className="flex items-center justify-center lg:justify-start gap-2 w-full px-2 sm:px-0">
+                <div className="fixed bottom-0 right-0 xl:w-[80%] lg:w-[75%] md:w-[100%] w-[100%] bg-white z-10 px-4 py-2 lg:px-8">
+                    <div className="flex md:flex-wrap items-center md:justify-between gap-2 w-full">
                         <input
                             type="text"
                             value={newMessage}
                             onChange={(e) => setNewMessage(e.target.value)}
                             placeholder="Send a message"
-                            className="xl:w-[738px] lg:w-[500px] w-full p-2 rounded-full border border-gray-200 focus:outline-none focus:border-[#E5024E] text-black"
+                            className="flex-grow p-2 rounded-full border border-gray-200 focus:outline-none focus:border-[#E5024E] text-black min-w-[150px]"
                             onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
                         />
                         <button
                             onClick={handleSendMessage}
                             className="h-10 px-6 lg:px-10 rounded-full font-medium text-white bg-gradient-to-t from-[#CC054D] to-[#EE6295] hover:from-pink-600 hover:to-rose-700 border-0 cursor-pointer shadow-lg flex items-center justify-center gap-1"
                         >
-                            {/* Desktop Submit Text */}
                             <span className="hidden lg:block">Submit</span>
-
-                            {/* Mobile Icon */}
                             <Send className="lg:hidden h-5 w-5" />
                         </button>
                     </div>
                 </div>
+
             </div>
         </div>
 

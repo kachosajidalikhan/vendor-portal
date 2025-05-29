@@ -25,7 +25,7 @@ export default function AnalyticsChart({ analyticsData }) {
           <span className="font-medium text-gray-700 Poppins">Sale</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-4 h-4 rounded bg-[#CC054D] inline-block"></span>
+          <span className="w-4 h-4 rounded bg-[#CD084F] inline-block"></span>
           <span className="font-medium text-gray-700 Poppins">Cancel</span>
         </div>
         <div className="flex items-center gap-2">
