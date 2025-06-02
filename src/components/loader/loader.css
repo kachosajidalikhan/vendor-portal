@@ -11,23 +11,28 @@
   justify-content: center;
   z-index: 9999;
   transition: opacity 0.5s ease-out;
+  overflow: hidden;
 }
 
+/* Default image size for large screens */
 .loader-image {
   width: 40%;
   height: auto;
   animation: slideUpIn 1s ease-out forwards;
 }
 
+/* Animation for slide in */
 .loader-wrapper.slide-out .loader-image {
   animation: slideUpOut 0.6s ease-in forwards;
 }
 
+/* Keyframes */
 @keyframes slideUpIn {
   0% {
     opacity: 0;
     transform: translateY(100px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -39,8 +44,25 @@
     opacity: 1;
     transform: translateY(0);
   }
+
   100% {
     opacity: 0;
     transform: translateY(-100px);
+  }
+}
+
+/* 🔻 Responsive Tweaks */
+
+/* Tablets */
+@media (max-width: 768px) {
+  .loader-image {
+    width: 100%;
+  }
+}
+
+/* Mobiles */
+@media (max-width: 480px) {
+  .loader-image {
+    width: 100%;
   }
 }

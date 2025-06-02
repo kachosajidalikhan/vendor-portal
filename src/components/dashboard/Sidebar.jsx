@@ -1,28 +1,19 @@
-import { X, LogOut, HomeIcon } from "lucide-react"; // Import X icon
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { X, LogOut } from "lucide-react";
+import { NavLink, useLocation } from "react-router-dom";
 import icons from "../../constants/index";
 import { useState, useEffect, useRef } from 'react';
+import { FiHelpCircle } from 'react-icons/fi';
 
-export default function Sidebar({ onLinkClick, onClose }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // default open
+export default function Sidebar({ onLinkClick, onClose, onLogout }) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Only for desktop
   const location = useLocation();
   const [barTop, setBarTop] = useState(0);
   const navRefs = useRef({});
   const sidebarRef = useRef(null);
 
-  const navigate = useNavigate();
-
-const handleLogout = () => {
-  // ✅ Clear auth data
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
-
-  // ✅ App ke state ya parent ko inform karo (agar stage system use ho raha hai)
-  if (onLinkClick) onLinkClick("login");
-
-  // ✅ Navigate to login page
-  // navigate("/login");
-};
+  const handleLogout = () => {
+    onLinkClick(false);
+  };
 
   const navItems = [
     { label: "Dashboard", icon: icons.HomeIcon, iconActive: icons.HomeIconActive, to: "/" },
@@ -54,93 +45,105 @@ const handleLogout = () => {
     }
   }, [location.pathname]);
 
-  if (!isSidebarOpen) return null; // Sidebar band hai to render mat karo
-
   return (
-    <div ref={sidebarRef} className="lg:w-68 w-full ml-6 lg:ml-0 bg-[#E5024E] lg:bg-white flex flex-col relative shadow-lg h-screen z-50">
+    <>
+      <div
+        ref={sidebarRef}
+        className={`relative transition-all duration-300 
+        ${isSidebarOpen ? "lg:w-68 w-full" : "lg:w-20 w-68"} 
+        ml-6 lg:ml-0 bg-[#E5024E] lg:bg-white flex flex-col relative shadow-lg h-screen z-50`}
+      >
+        {/* Logo and Close Button */}
+        <div className="flex bg-white items-center justify-between py-4 px-4">
+          {isSidebarOpen ? (
+            <img src={icons.Logo} alt="Logo" className="h-10" />
+          ) : (
+            <img src={icons.Logo3} alt="Small Logo" className="h-10 mx-auto" />
+          )}
 
-      {/* ❌ Close Button */}
-
-      {/* Logo */}
-      <div className="flex bg-white items-center justify-between py-4">
-        {/* <h1 className="text-xl font-bold lg:text-pink-600 text-white">Logo here</h1> */}
-        <img src={icons.Logo} alt="Logo" className="h-10 lg:h-full" />
-        <div className="px-4  lg:hidden block">
-          <button onClick={onClose}>
-            <X className="w-6 h-6 text-pink-600 hover:text-pink-600" />
-          </button>
+          {/* Close Button (Mobile Only) */}
+          <div className="lg:hidden block">
+            <button onClick={onClose}>
+              <X className="w-6 h-6 text-pink-600 hover:text-pink-600" />
+            </button>
+          </div>
         </div>
+
+        {/* Navigation Links */}
+        <nav className="flex-1 lg:px-1 mt-8 overflow-y-auto">
+          <ul className="space-y-2">
+            {navItems.map((item) => (
+              <li key={item.label} className="relative" ref={el => navRefs.current[item.to] = el}>
+                <NavLink
+                  to={item.to}
+                  onClick={onLinkClick}
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 p-2 px-4 font-medium transition-colors duration-150 ${isActive
+                      ? "lg:text-pink-500 text-pink-200 border-l-4 rounded-l-sm"
+                      : "lg:text-gray-500 text-white hover:bg-pink-50"
+                    }`
+                  }
+                  end={item.to === "/"}
+                >
+                  {({ isActive }) => (
+                    <>
+                      <div className="w-5 h-5 flex items-center justify-center">
+                        <img src={isActive ? item.iconActive : item.icon} alt="" className="w-5 h-5" />
+                      </div>
+                      <span className={`text-sm lg:text-lg transition-all duration-200 ${!isSidebarOpen ? 'hidden lg:hidden' : ''}`}>
+                        {item.label}
+                      </span>
+                    </>
+                  )}
+                </NavLink>
+              </li>
+            ))}
+
+            {/* Logout Button */}
+            <li className="relative">
+              <button
+                onClick={onLogout} // ✅ call passed logout function
+                className="flex w-full items-center text-sm lg:text-lg gap-3 p-2 px-4 rounded-md font-medium transition-colors duration-150 lg:text-gray-500 text-pink-200 hover:bg-pink-50"
+              >
+                <div className="w-5 h-5 flex items-center justify-center">
+                  <LogOut className="w-5 h-5" />
+                </div>
+                <span className={`${!isSidebarOpen ? 'hidden lg:hidden' : ''}`}>Logout</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+
+        {/* Help Centre */}
+        <div className={`p-4  ${!isSidebarOpen ? 'justify-center' : ''}`}>
+          <div className={`p-4 ${!isSidebarOpen ? 'justify-center' : ''}`}>
+            <div className="flex items-center gap-2 lg:text-gray-500 text-white">
+              <FiHelpCircle className="w-5 h-5" />
+              {isSidebarOpen && <span>Help Centre</span>}
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 lg:px-1 mt-8 overflow-y-auto">
-        <ul className="space-y-2">
-          {navItems.map((item) => (
-            <li key={item.label} className="relative" ref={el => navRefs.current[item.to] = el}>
-              <NavLink
-                to={item.to}
-                onClick={onLinkClick}
-                className={({ isActive }) =>
-                  `flex items-center gap-3 p-2  px-4 font-medium transition-colors duration-150 ${isActive
-                    ? "lg:text-pink-500 text-pink-200 border-l-4 rounded-l-sm"
-                    : "lg:text-gray-500 text-white hover:bg-pink-50"
-                  }`
-                }
-                end={item.to === "/"}
-              >
-                {({ isActive }) => (
-                  <>
-                    <div className="w-5 text-white h-5 flex items-center justify-center">
-                      <img src={isActive ? item.iconActive : item.icon} alt="" className={`w-5 h-5 ${isActive ? "text-white" : "text-black"}`} />
-                    </div>
+      {/* Collapse/Expand Arrow (Desktop Only) */}
+      <div onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="absolute -right-10 lg:block hidden bg-[#EE6295] rounded-r-2xl top-25 p-4 border-r border-[#E6EFF5]">
+        <button
 
-                    <span className="text-sm lg:text-lg">
-                      {item.label}
-                    </span>
-                  </>
-                )}
-              </NavLink>
-            </li>
-          ))}
-
-          {/* Logout */}
-          <li className="relative">
-            <button
-              onClick={handleLogout}
-              className="flex w-full items-center text-sm lg:text-lg gap-3 p-2 px-4 rounded-md font-medium transition-colors duration-150 lg:text-gray-500 text-pink-200 hover:bg-pink-50"
-            >
-              <div className="w-5 lg:text-gray-500 text-white h-5 flex items-center justify-center">
-                <LogOut className="w-5 h-5" />
-              </div>
-              Logout
-            </button>
-          </li>
-        </ul>
-      </nav>
-
-      {/* Active Bar */}
-      {/* <span
-        className="absolute left-0 h-9 w-1 lg:bg-pink-600 bg-white rounded-tl-sm rounded-bl-sm rounded-tr-2xl rounded-br-2xl transition-all duration-500 ease-in-out"
-        style={{ top: `${barTop}px` }}
-      ></span> */}
-
-      {/* Help Centre */}
-      <div className="mt-auto p-4 border-r border-[#E6EFF5]">
-        <div className="flex items-center gap-2 lg:text-gray-500 text-white">
+          className="flex items-center gap-2 text-white hover:text-pink-600 transition"
+        >
           <svg
-            className="w-5"
+            className={`w-5 h-5 transform transition-transform duration-300 ${!isSidebarOpen ? '' : 'rotate-180'}`}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
             strokeWidth="2"
           >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-            <path d="M12 17h.01" />
+            {/* Left pointing arrow by default */}
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>
-          Help Centre
-        </div>
+        </button>
       </div>
-    </div>
+    </>
   );
 }

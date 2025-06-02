@@ -34,6 +34,7 @@ import LazeezLogo from "../assets/LazeezIcon.svg";
 import chefIcon from '../assets/chefIcon.svg'
 import Logo2 from '../assets/Logo2.svg'
 import Logo from '../assets/Logo.png'
+import Logo3 from '../assets/Logo3.png'
 
 const files = {
   display: Display,
@@ -72,6 +73,7 @@ const files = {
   chefIcon: chefIcon,
   Logo2:Logo2,
   Logo:Logo
+  ,Logo3:Logo3
 };
 
 export default files;

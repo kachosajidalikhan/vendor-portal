@@ -68,11 +68,11 @@ export default function EditPackage() {
 return (
   <div className="w-full min-h-screen bg-white p-4 sm:p-6">
     {/* <Header title="Edit Package" /> */}
-    <div className="max-w-3xl p-2 sm:p-4 md:p-6 mx-auto">
       <div className="pb-2 cursor-pointer">
         <ChevronLeft color="#ED004F" onClick={handleBack} />
       </div>
-      <div className="flex gap-6 sm:gap-10 cursor-pointer">
+    <div className="max-w-3xl p-2 sm:p-4 md:p-6 mx-aut">
+      <div className="flex justify-center md:justify-start gap-6 sm:gap-10 cursor-pointer">
         <div className="mb-6 sm:mb-8" onClick={() => setActiveTab("info")}>
           <h1
             className={`font-medium ${
@@ -98,7 +98,7 @@ return (
           )}
         </div>
       </div>
-      <div className="flex flex-col sm:flex-row gap-8 sm:gap-12">
+      <div className="flex flex-col md:flex-row gap-8 sm:gap-12">
         <div className="flex-shrink-0 mx-auto sm:mx-0">
           <div className="relative">
             <div className="w-24 h-24 rounded-full bg-sky-100 overflow-hidden relative">
@@ -135,7 +135,7 @@ return (
             <form onSubmit={handleSubmit}>
               <div className="flex flex-col md:flex-row gap-6 md:gap-8 mb-8">
                 <div className="flex-grow">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 md:gap-x-36 gap-y-6">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 md:gap-x-36 gap-y-6">
                     <div className="space-y-0">
                       <label
                         htmlFor="packageName"
@@ -148,8 +148,9 @@ return (
                         name="packageName"
                         value={formData.packageName}
                         onChange={handleInputChange}
-                        className="rounded-xl w-full  h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                        className="rounded-xl w-full md:w-[318px]  h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
                       />
+
                     </div>
                     <div className="space-y-0">
                       <label
@@ -163,7 +164,7 @@ return (
                         name="packageType"
                         value={formData.packageType}
                         onChange={handleInputChange}
-                        className="rounded-xl w-full  h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                        className="rounded-xl w-full md:w-[318px] h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
                       >
                         <option value="">Select Type</option>
                         <option value="Buffet">Buffet</option>
@@ -184,7 +185,7 @@ return (
                         name="foodItem"
                         value={formData.foodItem}
                         onChange={handleInputChange}
-                        className="rounded-xl w-full  h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                        className="rounded-xl w-full md:w-[318px] h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
                       />
                     </div>
 
@@ -200,7 +201,7 @@ return (
                         name="description"
                         value={formData.description}
                         onChange={handleInputChange}
-                        className="rounded-xl w-full   h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                        className="rounded-xl w-full md:w-[318px] h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
                       />
                     </div>
                     <div className="space-y-0">
@@ -215,7 +216,7 @@ return (
                         name="totalServing"
                         value={formData.totalServing}
                         onChange={handleInputChange}
-                        className="rounded-xl w-full   h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                        className="rounded-xl w-full md:w-[318px] h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
                       />
                     </div>
 
@@ -231,7 +232,7 @@ return (
                         name="addOns"
                         value={formData.addOns}
                         onChange={handleInputChange}
-                        className="rounded-xl w-full   h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                        className="rounded-xl w-full md:w-[318px] h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
                       />
                     </div>
 
@@ -247,7 +248,7 @@ return (
                         name="price"
                         value={formData.price}
                         onChange={handleInputChange}
-                        className="rounded-xl w-full   h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                        className="rounded-xl w-full md:w-[318px] h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
                       />
                     </div>
 
@@ -263,7 +264,7 @@ return (
                         name="preparationTime"
                         value={formData.preparationTime}
                         onChange={handleInputChange}
-                        className="rounded-xl w-full   h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                        className="rounded-xl w-full md:w-[318px] h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
                       />
                     </div>
 
@@ -279,14 +280,14 @@ return (
                         name="deliveryTime"
                         value={formData.deliveryTime}
                         onChange={handleInputChange}
-                        className="rounded-xl w-full   h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                        className="rounded-xl w-full md:w-[318px] h-[50px] text-sm border border-[#9E033B] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
                       />
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="flex justify-end mt-4">
+              <div className="flex  justify-center lg:justify-end md:justify-start mt-4">
                 <button
                   type="submit"
                   className="bg-pink-500 hover:bg-pink-600 rounded-md px-6 py-3 text-white"
@@ -375,13 +376,13 @@ return (
           </div>
         </div>
 
-        <div className="flex justify-end items-center mt-8 pr-2">
+        <div className="flex md:justify-end items-center mt-8 pr-2">
           <button
             type="submit"
             onClick={handleCreate}
             className="bg-[#E5024E] text-white px-14 py-2 rounded-xl cursor-pointer hover:bg-pink-600"
           >
-            Update!
+            Save!
           </button>
         </div>
       </div>

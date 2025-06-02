@@ -62,7 +62,7 @@ function LazeezNotifications() {
 
         {/* mobile version */}
 
-        <div className="block md:hidden space-y-3">
+        <div className="block lg:hidden space-y-3">
           {notifications.map((notification) => (
             <div
               key={notification.id}
@@ -137,7 +137,7 @@ function LazeezNotifications() {
 
 {/* desktop version */}
 
-        <div className="hidden md:block space-y-3 w-full pt-12 px-30 border-l border-[#E6EFF5]">
+        <div className="hidden lg:block space-y-3 w-full pt-12 px-30 border-l border-[#E6EFF5]">
           {notifications.map((notification) => (
             <div
               key={notification.id}

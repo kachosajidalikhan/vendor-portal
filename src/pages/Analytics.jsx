@@ -192,8 +192,9 @@ export default function Analytics({
 
             <div className="flex flex-col gap-2 mb-4">
               {/* Top Labels Section */}
-              <div className="flex flex-col sm:flex-row bg-[#FFF5F6] rounded-lg pl-2 py-1 justify-between sm:gap-10 shadow-lg w-full sm:w-[720px] overflow-x-auto">
-                <div className="flex flex-wrap gap-4 sm:gap-5">
+              <div className="hidden md:flex flex-col sm:flex-row bg-[#FFF5F6] rounded-lg pl-2 py-1 justify-between sm:gap-10 shadow-lg w-full sm:w-[720px] overflow-x-auto">
+                {/* Labels and values together in mobile */}
+                <div className="hidden md:flex flex-col sm:flex-row gap-4 sm:gap-5">
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 rounded-full bg-[#EE6295]"></div>
                     <span className="text-sm font-bold text-[#9E033B]">Audience Reached</span>
@@ -208,7 +209,8 @@ export default function Analytics({
                   </div>
                 </div>
 
-                <div className="flex items-center lg:mt-2 mt-0 sm:relative">
+                {/* Edit button - comes last in mobile */}
+                <div className="flex items-center mt-2 sm:mt-0 sm:relative">
                   <button className="px-6 py-2 rounded-xl bg-[#e91e63] text-white font-semibold shadow hover:bg-[#c2185b] transition-all w-full sm:w-auto">
                     Edit
                   </button>
@@ -216,25 +218,36 @@ export default function Analytics({
               </div>
 
               {/* Value Section */}
-              <div className="flex flex-col sm:flex-row bg-[#FFF5F6] rounded-lg p-2 shadow-lg w-full sm:w-[480px]">
-                <div className="flex justify-center sm:w-40 py-2 w-full">
-                  <span className="text-md text-gray-900 text-center">
+              <div className="grid grid-cols-1 sm:flex bg-[#FFF5F6] rounded-lg p-4 shadow-lg w-full sm:w-[480px] gap-y-3 sm:gap-0">
+                <div className="flex md:flex-col gap-4 flex-row  sm:w-40 text-center">
+                  <span className="text-sm text-[#9E033B] font-semibold sm:hidden">Audience Reached</span>
+                  <span className="text-md text-gray-900">
                     {statistics.reached.toLocaleString()}
                   </span>
                 </div>
-                <div className="flex justify-center sm:w-40 py-2 w-full">
-                  <span className="text-md text-gray-900 text-center">
+
+                <div className="flex md:flex-col gap-4 flex-row sm:w-40 text-center">
+                  <span className="text-sm text-[#9E033B] font-semibold sm:hidden">Audience Engaged</span>
+                  <span className="text-md text-gray-900">
                     {statistics.engaged.toLocaleString()}
                   </span>
                 </div>
-                <div className="flex justify-center sm:w-40 py-2 w-full">
-                  <span className="text-md text-[#3A974C] text-center">
-                    {statistics.conversion}%+
+
+                <div className="flex md:flex-col gap-4 flex-row sm:w-40 text-center md:col-span-2 col-span-1">
+                  <span className="text-sm text-[#9E033B] font-semibold sm:hidden">Conversion Rate</span>
+                  <span className="text-md text-[#3A974C]">
+                    {statistics.conversion}%
                   </span>
+                </div>
+                <div className="flex md:hidden items-center mt-2 sm:mt-0 sm:relative">
+                  <button className="px-6 py-2 rounded-xl bg-[#e91e63] text-white font-semibold shadow hover:bg-[#c2185b] transition-all w-full sm:w-auto">
+                    Edit
+                  </button>
                 </div>
               </div>
             </div>
           </div>
+
 
 
 
@@ -357,14 +370,16 @@ export default function Analytics({
           </div>
 
           {/* Right Column */}
-          <div className="flex flex-col lg:flex-row justify-between items-start w-full gap-4">
-            {/* Recent Orders */}
-            <div className="bg-[#FFF5F6] p-6 rounded-xl shadow w-full lg:w-[65%]">
-              {/* Header */}
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-bold text-[#f50057]">Recent Orders</h3>
-                <button className="text-gray-400 text-xl">⋯</button>
-              </div>
+          <div className="">
+            <div className="flex flex-col lg:flex-row justify-between items-start w-full gap-4">
+              {/* Recent Orders */}
+
+              <div className="bg-[#FFF5F6] mt-9 p-6 rounded-xl shadow w-full lg:w-[65%]">
+                {/* Header */}
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-lg font-bold text-[#f50057]">Recent Orders</h3>
+                  <button className="text-gray-400 text-xl">⋯</button>
+                </div>
 
               {/* Table */}
               <div className="overflow-x-auto">
@@ -405,11 +420,12 @@ export default function Analytics({
                 </table>
               </div>
             </div>
+           
 
             {/* Income by Packages */}
             <div className="w-full lg:w-[35%]">
-              <div className="bg-white w-full flex flex-col">
                 <div className="text-lg font-bold text-pink-700 mb-2">Income by Packages</div>
+              <div className="bg-white w-full flex flex-col">
                 <div className="rounded-2xl p-6 w-full bg-pink-50">
                   <ResponsiveContainer key={Date.now()} width="100%" height={260}>
                     <PieChart>
@@ -457,6 +473,7 @@ export default function Analytics({
               </div>
             </div>
           </div>
+          </div>
 
         </div>
 
@@ -503,7 +520,7 @@ export default function Analytics({
             <div className="text-lg font-bold text-pink-700 mb-2">Recent Income</div>
             <div className="space-y-6 rounded-2xl shadow-lg lg:p-6 p-2 bg-white lg:min-h-[250px]">
               {recentIncome.map((item, idx) => (
-                <div className="flex items-center justify-between" key={idx}>
+                <div className="flex items-center px-2 justify-between" key={idx}>
                   <div>
                     <p className="font-semibold text-black">{item.name}</p>
                     <p className="text-xs text-pink-300">{item.date}</p>
@@ -514,6 +531,7 @@ export default function Analytics({
             </div>
           </div>
         </div>
+        <br />
 
 
 

@@ -39,11 +39,11 @@ const CreateOfferDetail = () => {
     <div className="min-h-screen bg-white p-6 space-y-8">
       {/* <Header title={"Offer Details"} /> */}
       {/* Top Metrics Card */}
-      <div className="relative">
+      <div onClick={() => navigate(-1)} className="pb-2 cursor-pointer">
+        <ChevronLeft color="#ED004F" />
+      </div>
+      <div className="hidden md:block">
         {/* Back Button */}
-        <div onClick={() => navigate(-1)} className="pb-2 cursor-pointer">
-          <ChevronLeft color="#ED004F" />
-        </div>
 
         {/* Header with Metrics Labels & Edit Button */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between bg-white rounded-2xl shadow-lg py-4 px-4 md:px-6 space-y-4 md:space-y-0">
@@ -64,10 +64,56 @@ const CreateOfferDetail = () => {
         </div>
 
         {/* Metric Values Row */}
-        <div className="flex flex-col md:flex-row items-center justify-center md:space-x-24 space-y-2 md:space-y-0 w-full md:w-[60%] mt-3 mx-auto px-4 py-3 bg-white rounded-xl shadow-lg">
+        <div className="flex flex-col md:flex-row items-center justify-center md:space-x-24 space-y-2 md:space-y-0 w-full md:w-[60%] mt-3 mx-auto md:mx-0 px-4 py-3 bg-white rounded-xl shadow-lg">
           <div className="w-full md:w-24 text-center text-gray-800 font-medium">5,000</div>
           <div className="w-full md:w-24 text-center text-gray-800 font-medium">3,333</div>
           <div className="w-full md:w-24 text-center text-green-600 font-semibold">12%+</div>
+        </div>
+      </div>
+
+
+      {/* Mobile Metrics Card */}
+
+
+      <div className="md:hidden  bg-white rounded-2xl shadow-lg py-4 px-4 md:px-6 space-y-4 md:space-y-0">
+        {/* Back Button */}
+
+        <div className="flex flex-row">
+          {/* Header with Metrics Labels & Edit Button */}
+          <div className="flex flex-col space-y-4 items-center">
+            {/* Metric Values Row */}
+            {/* <div className="flex flex-col md:flex-row items-center justify-center md:space-x-24 space-y-2 md:space-y-0 w-full md:w-[60%] mt-3 mx-auto md:mx-0 px-4 py-3 bg-white rounded-xl shadow-lg"> */}
+            <div className="w-full flex gap-4 ">
+              <MetricHeader label="Audience Reached" />
+              <span className='w-20 text-center text-gray-800 font-medium'>
+
+              5,000
+              </span>
+              </div>
+            <div className="w-full flex gap-4 ">
+              <MetricHeader label="Audience Engaged" />
+              <span className='w-20 text-center text-gray-800 font-medium'>
+
+              3,333
+              </span>
+              </div>
+            <div className="w-full flex gap-4  text-center text-green-600 font-semibold">
+              <MetricHeader label="Conversion Rate" />
+              <span className='w-20 text-right text-green-600 font-semibold'>
+
+              12%+
+              </span>
+              </div>
+            {/* </div> */}
+          </div>
+        </div>
+        <div className="flex justify-center md:justify-end">
+          <button
+            onClick={() => handleEdit()}
+            className="bg-[#E5024E]/80 text-white px-6 py-2 rounded-xl font-semibold text-sm shadow-md hover:bg-pink-600 transition"
+          >
+            Edit
+          </button>
         </div>
       </div>
 
@@ -87,7 +133,7 @@ const CreateOfferDetail = () => {
               <div className="absolute right-[-40px] bottom-8 w-24 h-24 bg-[#ED004F] rounded-full"></div>
             </div>
           </div>
-         ) : ( 
+        ) : (
           // {/* // 👇 Real content block */}
           <div className="lg:lg:w-[35%] md:w-[60%] w-[100%] md:p-6">
             <div className="max-w-md mx-auto relative">
@@ -117,7 +163,7 @@ const CreateOfferDetail = () => {
               )}
             </div>
           </div>
-        )} 
+        )}
       </div>
     </div>
   );

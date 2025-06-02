@@ -19,7 +19,7 @@ function StarRating({ value = 0 }) {
 
 export default function TopPackagesList({ topPackages }) {
   return (
-    <div className="p-4 sm:p-6 w-full max-w-md mx-auto">
+    <div className="p-4 sm:p-6 bg-[#FFF5F6] rounded-lg w-full max-w-md mx-auto">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-lg font-bold text-[#f50057]">Top Selling Packages</h3>
         <button className="text-gray-400 text-xl">⋯</button>

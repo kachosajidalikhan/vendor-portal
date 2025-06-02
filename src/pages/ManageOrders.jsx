@@ -383,7 +383,7 @@ return (
                       <User className="h-6 w-6 rounded-full overflow-hidden " />
                     </div>
                     
-                    <span className="text-sm font-medium text-pink-600">{order.name}</span>
+                    <span className="text-sm Poppins-bold text-pink-600">{order.name}</span>
                   </div>
                 </td>
 

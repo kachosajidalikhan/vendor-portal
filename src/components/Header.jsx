@@ -23,7 +23,7 @@ export default function Header({ title, lazeez, isSidebarOpen, toggleSidebar }) 
     "/create-offer/creating-offer": "Creating Offer",
     "/create-offer/create-offer-detail": "Offer Detail",
     "/create-offer/edit-offer": "Edit Offer",
-    "/food-list": "Food List",
+    "/food-list": "Vendor's Menu",
     "/food-list/create-menu": "Create Menu",
     "/food-list/edit-menu": "Edit Menu",
     "/track-payments": "Track Payments",
@@ -61,10 +61,10 @@ export default function Header({ title, lazeez, isSidebarOpen, toggleSidebar }) 
           </button>
 
           {/* Page Title */}
-          <h2 className="lg:text-2xl text-[16px] Poppins-bold text-white lg:text-pink-600 ml-1">
+          <h2 className="lg:text-2xl lg:flex block gap-5 items-center text-[16px] Poppins-bold text-white lg:text-pink-600 ml-1">
             {pageTitle}{" "}
             {isLazeezNotification && (
-              <p className="text-lg text-black Sunkids leading-5">Lazeez Event</p>
+              <p className="text-lg text-black Sunkids leading-5">Lazeez Events</p>
             )}
           </h2>
         </div>
@@ -87,7 +87,7 @@ export default function Header({ title, lazeez, isSidebarOpen, toggleSidebar }) 
               {({ isActive }) => (
                 <>
                   <button className="lg:w-10 lg:h-10 w-7 h-7 rounded-full bg-[#F2C4C7] flex items-center justify-center text-pink-600">
-                    <img src={icons.FoodIcon} className="w-4 h-4" alt="food" />
+                    <img src={icons.FoodIcon} className="lg:w-6 lg:h-6 w-5 h-5" alt="food" />
                   </button>
                   <span className={`absolute -bottom-2 h-1 w-7 left-0 right-0 m-auto bg-pink-600 rounded-br-2xl rounded-bl-2xl transition-opacity duration-200 ${isActive ? 'opacity-100' : 'opacity-0'}`}></span>
                 </>
@@ -101,9 +101,9 @@ export default function Header({ title, lazeez, isSidebarOpen, toggleSidebar }) 
               {({ isActive }) => (
                 <>
                   <button className="lg:w-10 lg:h-10 w-7 h-7 rounded-full bg-[#F2C4C7] flex items-center justify-center text-pink-600">
-                    <img src={icons.NotificationIcon} alt="notify" className="w-4 h-4" />
+                    <img src={icons.NotificationIcon} alt="notify" className="lg:w-6 lg:h-6 w-5 h-5" />
                   </button>
-                  <span className={`absolute -bottom-2 h-1 w-7 bg-pink-600 rounded-br-2xl rounded-bl-2xl transition-opacity duration-200 ${isActive ? 'opacity-100' : 'opacity-0'}`}></span>
+                  <span className={`absolute -bottom-2 lg:right-1 h-1 w-7 bg-pink-600 rounded-br-2xl rounded-bl-2xl transition-opacity duration-200 ${isActive ? 'opacity-100' : 'opacity-0'}`}></span>
                 </>
               )}
             </NavLink>

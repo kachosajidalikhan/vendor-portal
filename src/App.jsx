@@ -27,8 +27,9 @@ import CreateMenuPage from "./components/Menu/CreateMenu";
 import PackageCreation from "./pages/packageCreation";
 import EditPackage from "./pages/editPackage";
 import OrderDetail from './pages/orderDetail';
+import LazeezNotification from './pages/LazeezNotifications'
 
-function LayoutWithSidebar() {
+function LayoutWithSidebar({ onLogout }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -40,12 +41,12 @@ function LayoutWithSidebar() {
       {/* Sidebar */}
       <div
         className={`
-          fixed inset-y-0 -left-6 z-30 w-[250px] bg-white shadow-md transition-transform transform
+          fixed inset-y-0 -left-6 z-30  bg-white shadow-md transition-transform transform
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
           lg:translate-x-0 lg:static lg:inset-0
         `}
       >
-        <Sidebar onLinkClick={() => setIsSidebarOpen(false)} onClose={() => setIsSidebarOpen(false)} />
+        <Sidebar onLogout={onLogout} onLinkClick={() => setIsSidebarOpen(false)} onClose={() => setIsSidebarOpen(false)} />
       </div>
 
       {/* Main content */}
@@ -69,12 +70,18 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // or clear auth data if used
+    setStage("login"); // 👈 Send the user back to login stage
+  };
+
   if (loading) return <Loader />;
 
   return (
     <Router>
       <AnimatePresence mode="wait">
         <Routes>
+
           {/* Stage Based Routing */}
           <Route
             path="/*"
@@ -94,22 +101,23 @@ function App() {
 
           {/* Routes only accessible when logged in and finalized */}
           {stage === "done" && (
-            <Route path="/" element={<LayoutWithSidebar />}>
+            <Route path="/" element={<LayoutWithSidebar onLogout={handleLogout} />}>
               <Route index element={<Dashboard />} />
               <Route path="/manage-orders" element={<ManageOrders />} />
               <Route path="/manage-orders/order-detail" element={<OrderDetail />} />
               <Route path="/chats" element={<Chats />} />
               <Route path="/chats/messages/:id" element={<MessagePage />} />
               <Route path="/notifications" element={<Notifications />} />
+              <Route path="/lazeez-notifications" element={<LazeezNotification />} />
               <Route path="/create-package" element={<CreatePackage />} />
-              <Route path="/package-creation" element={<PackageCreation />} />
-              <Route path="/edit-package" element={<EditPackage />} />
+              <Route path="/create-package/package-creation" element={<PackageCreation />} />
+              <Route path="/create-package/edit-package" element={<EditPackage />} />
               <Route path="/create-offer" element={<CreateOffer />} />
-              <Route path="/creating-offer" element={<CreatingOfferPage />} />
-              <Route path="/create-offer-detail/:id" element={<CreateOfferDetail />} />
-              <Route path="/edit-offer/:id" element={<EditOfferPage />} />
+              <Route path="/create-offer/creating-offer" element={<CreatingOfferPage />} />
+              <Route path="/create-offer/create-offer-detail/:id" element={<CreateOfferDetail />} />
+              <Route path="/create-offer/edit-offer/:id" element={<EditOfferPage />} />
               <Route path="/food-list" element={<FoodList />} />
-              <Route path="/create-menu" element={<CreateMenuPage />} />
+              <Route path="/food-list/create-menu" element={<CreateMenuPage />} />
               <Route path="/track-payments" element={<TrackPayments />} />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/settings" element={<Settings />} />

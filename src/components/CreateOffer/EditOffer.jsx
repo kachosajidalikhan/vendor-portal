@@ -137,6 +137,7 @@ export default function EditOfferPage() {
               <div className="relative">
                 <select
                   name="foodCategory"
+                  required
                   className="w-full h-[50px] px-3 py-2 border border-gray-300 rounded-md appearance-none"
                   value={formData.foodCategory}
                   onChange={handleInputChange}
@@ -144,11 +145,12 @@ export default function EditOfferPage() {
                   <option value="" disabled>
                     Choose food category
                   </option>
-                  <option value="italian">Italian</option>
-                  <option value="mexican">Mexican</option>
-                  <option value="asian">Asian</option>
-                  <option value="desserts">Desserts</option>
-                  <option value="fast-food">Fast Food</option>
+                  <option value="Desi Food">Desi Food</option>
+                  <option value="Chinese Food">Chinese Food</option>
+                  <option value="Desserts & Sweets">Desserts & Sweets</option>
+                  <option value="Continental Food">Continental Food</option>
+                  <option value="Fast Food">Fast Food</option>
+                  <option value="Snacks & Appetizers">Snacks & Appetizers</option>
                 </select>
                 <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
               </div>

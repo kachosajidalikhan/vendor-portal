@@ -128,6 +128,7 @@ function CreatePackage() {
     navigate('/create-package/edit-package', { state: { packageData } });
   }
 
+
   return (
     <div className="w-full min-h-screen bg-white p-4">
       {/* Container */}
@@ -212,7 +213,7 @@ function CreatePackage() {
           <img
             src={icons.LazeezLogo}
             alt="Create Package"
-            className="w-8 h-8 md:w-10 md:h-10"
+            className="w-18 h-18 md:w-25 md:h-25"
             draggable={false}
           />
         </div>

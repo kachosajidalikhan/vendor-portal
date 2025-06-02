@@ -182,7 +182,7 @@ function CreateOffer() {
           ))}
         </div>
         <NavLink to="/create-offer/creating-offer">
-          <div className="absolute bottom-10 bg-[#9E033B] w-20 h-20  right-10 rounded-full shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)]">
+          <div className="absolute bottom-10 bg-[#9E033B] w-20 h-20 right-10 rounded-full shadow-[0_-2px_4px_-1px_rgba(0,0,0,0.1),0_8px_10px_-1px_rgba(0,0,0,0.1)]">
             <img src={icons.LazeezLogo} alt="" />
           </div>
         </NavLink>
