@@ -127,7 +127,7 @@ export default function Sidebar({ onLinkClick, onClose, onLogout }) {
       </div>
 
       {/* Collapse/Expand Arrow (Desktop Only) */}
-      <div onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="absolute -right-10 lg:block hidden bg-[#EE6295] rounded-r-2xl top-25 p-4 border-r border-[#E6EFF5]">
+      <div onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="absolute -right-10 lg:block hidden bg-[#EE6295] rounded-r-2xl top-80 p-4 border-r border-[#E6EFF5]">
         <button
 
           className="flex items-center gap-2 text-white hover:text-pink-600 transition"
